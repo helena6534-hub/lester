@@ -18,14 +18,15 @@ class _loginState extends State<login> {
   static const Color blueLight = Color(0xFFA3CEE8);
   static const Color blueMedium = Color(0xFF7F97B8);
   static const Color bluePetrol = Color(0xFF4A7C99);
-
+         
+  // Guarda informações do usuario, evita vazamentos
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
-
+  // Valida informações do usuario 
   void _handleLogin() {
     if (_formKey.currentState!.validate()) {
       // Implementar lógica de login
@@ -33,17 +34,15 @@ class _loginState extends State<login> {
       debugPrint('Password: ${_passwordController.text}');
     }
   }
-
+  // Implementar lógica de recuperação de senha
   void _handleForgotPassword() {
-    // Implementar lógica de recuperação de senha
     debugPrint('Esqueceu a senha');
   }
-
+  // Implementar lógica de cadastro
   void _handleSignUp() {
-    // Implementar lógica de cadastro
     debugPrint('Cadastrar nova conta');
   }
-
+  //design das caixas de texto
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,7 +95,7 @@ class _loginState extends State<login> {
       ),
     );
   }
-
+ //Informações acima das caixas de texto(logo, titulo)
   Widget _buildHeader() {
     return Column(
       children: [
