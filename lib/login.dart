@@ -115,7 +115,7 @@ class _loginState extends State<login> {
       ],
     );
   }
-
+  //posição da sombra
   Widget _buildFormCard() {
     return Container(
       decoration: BoxDecoration(
@@ -130,13 +130,14 @@ class _loginState extends State<login> {
           ),
         ],
       ),
+      //organizar e dar espaçamento ao conteúdo do formulário
       padding: const EdgeInsets.all(32),
       child: Form(
         key: _formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Header do card
+            // Cabeçalho do card
             Row(
               children: [
                 const Icon(
@@ -241,7 +242,7 @@ class _loginState extends State<login> {
       ),
     );
   }
-
+  //estilização gmail e senha
   Widget _buildLabel(String text) {
     return Text(
       text,
@@ -252,7 +253,7 @@ class _loginState extends State<login> {
       ),
     );
   }
-
+  //estilziza campos de texto, valida eles, reutilizaveis no app
   Widget _buildTextField({
     required TextEditingController controller,
     required String hintText,
@@ -296,7 +297,7 @@ class _loginState extends State<login> {
       ),
     );
   }
-
+  //rodapé da tela de login
   Widget _buildFooter() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -327,37 +328,4 @@ class _loginState extends State<login> {
       ],
     );
   }
-
-  Widget _buildDecorativeBooks() {
-    return Opacity(
-      opacity: 0.6,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          _buildBookBar(blueLight, 48),
-          const SizedBox(width: 8),
-          _buildBookBar(blueMedium, 56),
-          const SizedBox(width: 8),
-          _buildBookBar(bluePetrol, 40),
-          const SizedBox(width: 8),
-          _buildBookBar(blueLight, 48),
-          const SizedBox(width: 8),
-          _buildBookBar(blueMedium, 64),
-          const SizedBox(width: 8),
-          _buildBookBar(bluePetrol, 44),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildBookBar(Color color, double height) {
-    return Container(
-      width: 8,
-      height: height,
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(2),
-      ),
-    );
-  }
-}
+         //aqui temos que colocar uma imagem de livros ok
