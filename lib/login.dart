@@ -101,9 +101,10 @@ class _loginState extends State<login> {
   Widget _buildHeader() {
     return Column(
       children: [
-        // Ícone circular
-        Image.asset("imagens/foto.jpg"),
-        const SizedBox(height: 16),
+        // Foto lester
+        Image.asset("imagens/lester.png",
+
+        )
       ],
     );
   }
