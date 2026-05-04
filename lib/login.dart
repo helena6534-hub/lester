@@ -86,7 +86,7 @@ class _loginState extends State<login> {
                       const SizedBox(height: 32),
 
                       // Decorative Books
-                      _buildDecorativeBooks(),
+                      
                     ],
                   ),
                 ),
@@ -102,7 +102,7 @@ class _loginState extends State<login> {
     return Column(
       children: [
         // Ícone circular
-        Image.asset('imagens\\username.png'),
+        Image.asset("imagens/foto.jpg"),
         const SizedBox(height: 16),
       ],
     );
@@ -321,3 +321,4 @@ class _loginState extends State<login> {
     );
   }
          //aqui temos que colocar uma imagem de livros ok
+}
