@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-         
+
 
 class login extends StatefulWidget {
+  const login({super.key});
+
 
   @override
   State<login> createState() => _loginState();
@@ -101,17 +103,7 @@ class _loginState extends State<login> {
     return Column(
       children: [
         // Ícone circular
-        Container(
-          width: 80,
-          height: 80,
-          decoration: const BoxDecoration(
-            color: bluePetrol,
-            shape: BoxShape.circle,
-          ),
-          child: Image.asset (
-            'assets/username'
-          ),
-        ),
+        Image.asset('imagens\\username.png'),
         const SizedBox(height: 16),
       ],
     );
