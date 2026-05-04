@@ -102,8 +102,8 @@ class _loginState extends State<login> {
     return Column(
       children: [
         // Foto lester
-        Image.asset("imagens/lester.png",
-
+        Image.asset("imagens/username.png",
+          height: 700,
         )
       ],
     );
