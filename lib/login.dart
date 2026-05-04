@@ -103,7 +103,7 @@ class _loginState extends State<login> {
       children: [
         // Foto lester
         Image.asset("imagens/username.png",
-          height: 700,
+          width: 400,
         )
       ],
     );
@@ -303,7 +303,7 @@ class _loginState extends State<login> {
           ),
         ),
         TextButton(
-          onPressed: _handleSignUp,
+          onPressed: () =>_handleSignUp (context),
           style: TextButton.styleFrom(
             padding: EdgeInsets.zero,
             minimumSize: const Size(0, 0),
