@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:lester/cadastro.dart';
 
 class login extends StatefulWidget {
   const login({super.key});
-
 
   @override
   State<login> createState() => _loginState();
@@ -20,7 +19,7 @@ class _loginState extends State<login> {
   static const Color blueLight = Color(0xFFA3CEE8);
   static const Color blueMedium = Color(0xFF7F97B8);
   static const Color bluePetrol = Color(0xFF4A7C99);
-         
+
   // Guarda informações do usuario, evita vazamentos
   @override
   void dispose() {
@@ -28,7 +27,8 @@ class _loginState extends State<login> {
     _passwordController.dispose();
     super.dispose();
   }
-  // Valida informações do usuario 
+
+  // Valida informações do usuario
   void _handleLogin() {
     if (_formKey.currentState!.validate()) {
       // Implementar lógica de login
@@ -36,14 +36,20 @@ class _loginState extends State<login> {
       debugPrint('Password: ${_passwordController.text}');
     }
   }
+
   // Implementar lógica de recuperação de senha
   void _handleForgotPassword() {
     debugPrint('Esqueceu a senha');
   }
+
   // Implementar lógica de cadastro
   void _handleSignUp() {
-    debugPrint('Cadastrar nova conta');
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => CadastroScreen()),
+    );
   }
+
   //design das caixas de texto
   @override
   Widget build(BuildContext context) {
@@ -53,12 +59,7 @@ class _loginState extends State<login> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [
-              beigeLight,
-              blueLight,
-              blueMedium,
-              bluePetrol,
-            ],
+            colors: [beigeLight, blueLight, blueMedium, bluePetrol],
             stops: [0.0, 0.35, 0.70, 1.0],
           ),
         ),
@@ -86,7 +87,6 @@ class _loginState extends State<login> {
                       const SizedBox(height: 32),
 
                       // Decorative Books
-                      
                     ],
                   ),
                 ),
@@ -97,17 +97,17 @@ class _loginState extends State<login> {
       ),
     );
   }
- //Informações acima das caixas de texto(logo, titulo)
+
+  //Informações acima das caixas de texto(logo, titulo)
   Widget _buildHeader() {
     return Column(
       children: [
         // Foto lester
-        Image.asset("imagens/username.png",
-          width: 400,
-        )
+        Image.asset("imagens/username.png", width: 500),
       ],
     );
   }
+
   //posição da sombra
   Widget _buildFormCard() {
     return Container(
@@ -133,11 +133,7 @@ class _loginState extends State<login> {
             // Cabeçalho do card
             Row(
               children: [
-                const Icon(
-                  Icons.book_outlined,
-                  color: bluePetrol,
-                  size: 20,
-                ),
+                const Icon(Icons.book_outlined, color: bluePetrol, size: 20),
                 const SizedBox(width: 8),
                 const Text(
                   'Login',
@@ -201,10 +197,7 @@ class _loginState extends State<login> {
                 ),
                 child: const Text(
                   'Esqueceu sua senha?',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: blueMedium,
-                  ),
+                  style: TextStyle(fontSize: 14, color: blueMedium),
                 ),
               ),
             ),
@@ -224,10 +217,7 @@ class _loginState extends State<login> {
               ),
               child: const Text(
                 'Entrar',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
               ),
             ),
           ],
@@ -235,6 +225,7 @@ class _loginState extends State<login> {
       ),
     );
   }
+
   //estilização gmail e senha
   Widget _buildLabel(String text) {
     return Text(
@@ -246,6 +237,7 @@ class _loginState extends State<login> {
       ),
     );
   }
+
   //estilziza campos de texto, valida eles, reutilizaveis no app
   Widget _buildTextField({
     required TextEditingController controller,
@@ -290,6 +282,7 @@ class _loginState extends State<login> {
       ),
     );
   }
+
   //rodapé da tela de login
   Widget _buildFooter() {
     return Row(
@@ -297,13 +290,10 @@ class _loginState extends State<login> {
       children: [
         Text(
           'Não tem uma conta? ',
-          style: TextStyle(
-            fontSize: 14,
-            color: Colors.white.withOpacity(0.9),
-          ),
+          style: TextStyle(fontSize: 14, color: Colors.white.withOpacity(0.9)),
         ),
         TextButton(
-          onPressed: () =>_handleSignUp (context),
+          onPressed: _handleSignUp,
           style: TextButton.styleFrom(
             padding: EdgeInsets.zero,
             minimumSize: const Size(0, 0),
@@ -321,5 +311,6 @@ class _loginState extends State<login> {
       ],
     );
   }
-         //aqui temos que colocar uma imagem de livros ok
+
+  //aqui temos que colocar uma imagem de livros ok
 }

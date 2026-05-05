@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lester/login.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,9 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Lêster Cadastro',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData(primarySwatch: Colors.blue),
       home: const CadastroScreen(),
     );
   }
@@ -31,9 +31,15 @@ class _CadastroScreenState extends State<CadastroScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController nomeController = TextEditingController();
   final TextEditingController senhaController = TextEditingController();
-  final TextEditingController confirmarSenhaController = TextEditingController();
+  final TextEditingController confirmarSenhaController =
+      TextEditingController();
   bool obscureSenha = true;
   bool obscureConfirmarSenha = true;
+
+  static const Color beigeLight = Color(0xFFF5F3E7);
+  static const Color blueLight = Color(0xFFA3CEE8);
+  static const Color blueMedium = Color(0xFF7F97B8);
+  static const Color bluePetrol = Color(0xFF4A7C99);
 
   @override
   Widget build(BuildContext context) {
@@ -43,10 +49,7 @@ class _CadastroScreenState extends State<CadastroScreen> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [
-              Color(0xFFB8CFE0),
-              Color(0xFF5B94B8),
-            ],
+            colors: [beigeLight, Color(0xFF5B94B8), bluePetrol],
           ),
         ),
         child: SafeArea(
@@ -57,26 +60,8 @@ class _CadastroScreenState extends State<CadastroScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // Logo e título
-                  const Text(
-                    'lêster',
-                    style: TextStyle(
-                      fontSize: 56,
-                      fontWeight: FontWeight.w300,
-                      color: Color(0xFF5B94B8),
-                      letterSpacing: 2,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  const Text(
-                    'Cadastro',
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.w300,
-                      color: Color(0xFF7AADCC),
-                    ),
-                  ),
-                  const SizedBox(height: 32),
-                  
+                  Image.asset("imagens/username.png", width: 500),
+
                   // Card branco com formulário
                   Container(
                     padding: const EdgeInsets.all(24),
@@ -86,6 +71,25 @@ class _CadastroScreenState extends State<CadastroScreen> {
                     ),
                     child: Column(
                       children: [
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.signpost_outlined,
+                              color: bluePetrol,
+                              size: 20,
+                            ),
+                            const SizedBox(width: 8),
+                            const Text(
+                              'Cadastre-se',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                                color: bluePetrol,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 18),
                         // Toggle Leitor/Escritor
                         Row(
                           children: [
@@ -93,9 +97,13 @@ class _CadastroScreenState extends State<CadastroScreen> {
                               child: GestureDetector(
                                 onTap: () => setState(() => isLeitor = true),
                                 child: Container(
-                                  padding: const EdgeInsets.symmetric(vertical: 16),
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 16,
+                                  ),
                                   decoration: BoxDecoration(
-                                    color: isLeitor ? const Color(0xFF4A91B8) : const Color(0xFFB8D4E5),
+                                    color: isLeitor
+                                        ? const Color(0xFF4A91B8)
+                                        : const Color(0xFFB8D4E5),
                                     borderRadius: BorderRadius.circular(24),
                                   ),
                                   child: Center(
@@ -116,9 +124,13 @@ class _CadastroScreenState extends State<CadastroScreen> {
                               child: GestureDetector(
                                 onTap: () => setState(() => isLeitor = false),
                                 child: Container(
-                                  padding: const EdgeInsets.symmetric(vertical: 16),
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 16,
+                                  ),
                                   decoration: BoxDecoration(
-                                    color: !isLeitor ? const Color(0xFF4A91B8) : const Color(0xFFB8D4E5),
+                                    color: !isLeitor
+                                        ? const Color(0xFF4A91B8)
+                                        : const Color(0xFFB8D4E5),
                                     borderRadius: BorderRadius.circular(24),
                                   ),
                                   child: Center(
@@ -137,7 +149,7 @@ class _CadastroScreenState extends State<CadastroScreen> {
                           ],
                         ),
                         const SizedBox(height: 20),
-                        
+
                         // Campo Email
                         _buildTextField(
                           controller: emailController,
@@ -145,7 +157,7 @@ class _CadastroScreenState extends State<CadastroScreen> {
                           icon: Icons.email_outlined,
                         ),
                         const SizedBox(height: 16),
-                        
+
                         // Campo Nome de Usuario
                         _buildTextField(
                           controller: nomeController,
@@ -153,7 +165,7 @@ class _CadastroScreenState extends State<CadastroScreen> {
                           icon: Icons.person_outline,
                         ),
                         const SizedBox(height: 16),
-                        
+
                         // Campo Senha
                         _buildTextField(
                           controller: senhaController,
@@ -161,10 +173,11 @@ class _CadastroScreenState extends State<CadastroScreen> {
                           icon: Icons.lock_outline,
                           isPassword: true,
                           obscureText: obscureSenha,
-                          onToggleVisibility: () => setState(() => obscureSenha = !obscureSenha),
+                          onToggleVisibility: () =>
+                              setState(() => obscureSenha = !obscureSenha),
                         ),
                         const SizedBox(height: 16),
-                        
+
                         // Campo Confirmar senha
                         _buildTextField(
                           controller: confirmarSenhaController,
@@ -172,13 +185,20 @@ class _CadastroScreenState extends State<CadastroScreen> {
                           icon: Icons.lock_outline,
                           isPassword: true,
                           obscureText: obscureConfirmarSenha,
-                          onToggleVisibility: () => setState(() => obscureConfirmarSenha = !obscureConfirmarSenha),
+                          onToggleVisibility: () => setState(
+                            () =>
+                                obscureConfirmarSenha = !obscureConfirmarSenha,
+                          ),
                         ),
                         const SizedBox(height: 16),
-                        
+
                         // Link "Já é cadastrado?"
                         TextButton(
                           onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => login()),
+                            );
                             // Navegar para tela de login
                           },
                           child: const Text(
@@ -191,7 +211,7 @@ class _CadastroScreenState extends State<CadastroScreen> {
                           ),
                         ),
                         const SizedBox(height: 8),
-                        
+
                         // Botão Cadastrar
                         SizedBox(
                           width: double.infinity,
@@ -209,7 +229,7 @@ class _CadastroScreenState extends State<CadastroScreen> {
                             child: const Text(
                               'Cadastrar',
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 17,
                                 fontWeight: FontWeight.w500,
                                 color: Colors.white,
                               ),
@@ -247,19 +267,31 @@ class _CadastroScreenState extends State<CadastroScreen> {
         style: const TextStyle(color: Colors.white, fontSize: 16),
         decoration: InputDecoration(
           hintText: hint,
-          hintStyle: const TextStyle(color: Colors.white70),
-          prefixIcon: Icon(icon, color: Colors.white60),
+          hintStyle: const TextStyle(color: Colors.white70, fontSize: 16),
+          prefixIcon: Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: Icon(icon, color: Colors.white60, size: 22),
+          ),
           suffixIcon: isPassword
-              ? IconButton(
-                  icon: Icon(
-                    obscureText ? Icons.lock_outline : Icons.lock_open_outlined,
-                    color: Colors.white60,
+              ? Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: IconButton(
+                    icon: Icon(
+                      obscureText
+                          ? Icons.lock_outline
+                          : Icons.lock_open_outlined,
+                      color: Colors.white60,
+                      size: 22,
+                    ),
+                    onPressed: onToggleVisibility,
                   ),
-                  onPressed: onToggleVisibility,
                 )
               : null,
           border: InputBorder.none,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 16,
+          ),
         ),
       ),
     );
