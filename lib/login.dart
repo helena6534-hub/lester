@@ -50,7 +50,7 @@ class _loginState extends State<login> {
     );
   }
 
-  //design das caixas de texto
+  //fundo
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,11 +104,13 @@ class _loginState extends State<login> {
       children: [
         // Foto lester
         Image.asset("imagens/username.png", width: 500),
+        const SizedBox(width: 10,)
       ],
+      
     );
   }
 
-  //posição da sombra
+  //dentro da caixa
   Widget _buildFormCard() {
     return Container(
       decoration: BoxDecoration(
@@ -226,7 +228,7 @@ class _loginState extends State<login> {
     );
   }
 
-  //estilização gmail e senha
+  //estilização das sized box
   Widget _buildLabel(String text) {
     return Text(
       text,

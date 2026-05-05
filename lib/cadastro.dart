@@ -61,6 +61,7 @@ class _CadastroScreenState extends State<CadastroScreen> {
                 children: [
                   // Logo e título
                   Image.asset("imagens/username.png", width: 500),
+                  const SizedBox(width: 20,),
 
                   // Card branco com formulário
                   Container(
@@ -154,7 +155,6 @@ class _CadastroScreenState extends State<CadastroScreen> {
                         _buildTextField(
                           controller: emailController,
                           hint: 'Email',
-                          icon: Icons.email_outlined,
                         ),
                         const SizedBox(height: 16),
 
@@ -162,7 +162,6 @@ class _CadastroScreenState extends State<CadastroScreen> {
                         _buildTextField(
                           controller: nomeController,
                           hint: 'Nome de Usuario',
-                          icon: Icons.person_outline,
                         ),
                         const SizedBox(height: 16),
 
@@ -170,7 +169,6 @@ class _CadastroScreenState extends State<CadastroScreen> {
                         _buildTextField(
                           controller: senhaController,
                           hint: 'Senha',
-                          icon: Icons.lock_outline,
                           isPassword: true,
                           obscureText: obscureSenha,
                           onToggleVisibility: () =>
@@ -182,7 +180,6 @@ class _CadastroScreenState extends State<CadastroScreen> {
                         _buildTextField(
                           controller: confirmarSenhaController,
                           hint: 'Confirmar senha',
-                          icon: Icons.lock_outline,
                           isPassword: true,
                           obscureText: obscureConfirmarSenha,
                           onToggleVisibility: () => setState(
@@ -258,33 +255,27 @@ class _CadastroScreenState extends State<CadastroScreen> {
   }) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF5B94B8),
-        borderRadius: BorderRadius.circular(24),
+        color: const Color(0xFFF5F3E7),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(
+          color: blueLight, width: 2
+        )
       ),
       child: TextField(
         controller: controller,
         obscureText: isPassword && obscureText,
-        style: const TextStyle(color: Colors.white, fontSize: 16),
+        style: const TextStyle(color: Colors.black, fontSize: 16),
         decoration: InputDecoration(
           hintText: hint,
-          hintStyle: const TextStyle(color: Colors.white70, fontSize: 16),
+          hintStyle: const TextStyle(color: Colors.black, fontSize: 16),
           prefixIcon: Padding(
             padding: const EdgeInsets.only(left: 10),
-            child: Icon(icon, color: Colors.white60, size: 22),
+            child: Icon(icon, color: Colors.black, size: 22),
           ),
           suffixIcon: isPassword
               ? Padding(
                   padding: const EdgeInsets.only(right: 10),
-                  child: IconButton(
-                    icon: Icon(
-                      obscureText
-                          ? Icons.lock_outline
-                          : Icons.lock_open_outlined,
-                      color: Colors.white60,
-                      size: 22,
-                    ),
-                    onPressed: onToggleVisibility,
-                  ),
+                  
                 )
               : null,
           border: InputBorder.none,
