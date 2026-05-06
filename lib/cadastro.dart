@@ -61,7 +61,7 @@ class _CadastroScreenState extends State<CadastroScreen> {
                 children: [
                   // Logo e título
                   Image.asset("imagens/username.png", width: 500),
-                  const SizedBox(width: 20,),
+                  const SizedBox(width: 20),
 
                   // Card branco com formulário
                   Container(
@@ -74,8 +74,8 @@ class _CadastroScreenState extends State<CadastroScreen> {
                           color: Colors.black.withOpacity(0.1),
                           blurRadius: 20,
                           offset: const Offset(0, 10),
-                      ),
-                      ]
+                        ),
+                      ],
                     ),
                     child: Column(
                       children: [
@@ -199,10 +199,7 @@ class _CadastroScreenState extends State<CadastroScreen> {
                         // Link "Já é cadastrado?"
                         TextButton(
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => login()),
-                            );
+                            Navigator.pop(context);
                             // Navegar para tela de login
                           },
                           child: const Text(
@@ -264,9 +261,7 @@ class _CadastroScreenState extends State<CadastroScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFF5F3E7),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: blueLight, width: 2
-        )
+        border: Border.all(color: blueLight, width: 2),
       ),
       child: TextField(
         controller: controller,
@@ -276,10 +271,7 @@ class _CadastroScreenState extends State<CadastroScreen> {
           hintText: hint,
           hintStyle: const TextStyle(color: Colors.black, fontSize: 16),
           suffixIcon: isPassword
-              ? Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  
-                )
+              ? Padding(padding: const EdgeInsets.only(right: 10))
               : null,
           border: InputBorder.none,
           contentPadding: const EdgeInsets.symmetric(

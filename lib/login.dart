@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lester/cadastro.dart';
-
-void main() {
-  runApp(const MyApp());
-}
+import 'package:lester/telainicial.dart';
 
 class login extends StatefulWidget {
   const login({super.key});
@@ -41,7 +38,7 @@ class _loginState extends State<login> {
     }
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => ),
+      MaterialPageRoute(builder: (context) => const Telainicial()),
     );
   }
 
@@ -112,9 +109,8 @@ class _loginState extends State<login> {
       children: [
         // Foto lester
         Image.asset("imagens/username.png", width: 500),
-        const SizedBox(width: 10,)
+        const SizedBox(width: 10),
       ],
-      
     );
   }
 
