@@ -68,7 +68,14 @@ class _CadastroScreenState extends State<CadastroScreen> {
                     padding: const EdgeInsets.all(24),
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(24),
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 20,
+                          offset: const Offset(0, 10),
+                      ),
+                      ]
                     ),
                     child: Column(
                       children: [
@@ -103,7 +110,7 @@ class _CadastroScreenState extends State<CadastroScreen> {
                                   ),
                                   decoration: BoxDecoration(
                                     color: isLeitor
-                                        ? const Color(0xFF4A91B8)
+                                        ? const Color(0xFF4A7C99)
                                         : const Color(0xFFB8D4E5),
                                     borderRadius: BorderRadius.circular(24),
                                   ),
@@ -111,7 +118,7 @@ class _CadastroScreenState extends State<CadastroScreen> {
                                     child: Text(
                                       'Leitor',
                                       style: TextStyle(
-                                        color: Colors.white,
+                                        color: Color(0xFFF5F3E7),
                                         fontSize: 18,
                                         fontWeight: FontWeight.w500,
                                       ),
@@ -130,7 +137,7 @@ class _CadastroScreenState extends State<CadastroScreen> {
                                   ),
                                   decoration: BoxDecoration(
                                     color: !isLeitor
-                                        ? const Color(0xFF4A91B8)
+                                        ? const Color(0xFF4A7C99)
                                         : const Color(0xFFB8D4E5),
                                     borderRadius: BorderRadius.circular(24),
                                   ),
@@ -138,7 +145,7 @@ class _CadastroScreenState extends State<CadastroScreen> {
                                     child: Text(
                                       'Escritor',
                                       style: TextStyle(
-                                        color: Colors.white,
+                                        color: Color(0xFFF5F3E7),
                                         fontSize: 18,
                                         fontWeight: FontWeight.w500,
                                       ),
@@ -217,10 +224,11 @@ class _CadastroScreenState extends State<CadastroScreen> {
                               // Lógica de cadastro
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF5B94B8),
+                              backgroundColor: const Color(0xFF4A7C99),
+                              foregroundColor: Colors.white,
                               padding: const EdgeInsets.symmetric(vertical: 16),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(24),
+                                borderRadius: BorderRadius.circular(8),
                               ),
                             ),
                             child: const Text(
@@ -248,7 +256,6 @@ class _CadastroScreenState extends State<CadastroScreen> {
   Widget _buildTextField({
     required TextEditingController controller,
     required String hint,
-    required IconData icon,
     bool isPassword = false,
     bool obscureText = false,
     VoidCallback? onToggleVisibility,
@@ -268,10 +275,6 @@ class _CadastroScreenState extends State<CadastroScreen> {
         decoration: InputDecoration(
           hintText: hint,
           hintStyle: const TextStyle(color: Colors.black, fontSize: 16),
-          prefixIcon: Padding(
-            padding: const EdgeInsets.only(left: 10),
-            child: Icon(icon, color: Colors.black, size: 22),
-          ),
           suffixIcon: isPassword
               ? Padding(
                   padding: const EdgeInsets.only(right: 10),

@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lester/cadastro.dart';
 
+void main() {
+  runApp(const MyApp());
+}
+
 class login extends StatefulWidget {
   const login({super.key});
 
@@ -35,6 +39,10 @@ class _loginState extends State<login> {
       debugPrint('Login: ${_emailController.text}');
       debugPrint('Password: ${_passwordController.text}');
     }
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ),
+    );
   }
 
   // Implementar lógica de recuperação de senha
