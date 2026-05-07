@@ -3,6 +3,23 @@ import 'package:flutter/services.dart';
 import 'package:lester/cadastro.dart';
 import 'package:lester/telainicial.dart';
 
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: "Login",
+      theme: ThemeData(primaryColor: Colors.blue),
+      home: login(),
+    );
+  }
+}
+
 class login extends StatefulWidget {
   const login({super.key});
 
