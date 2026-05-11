@@ -23,7 +23,14 @@ class HomeScreen extends StatefulWidget {
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
+  static const Color blueMedium = Color(0xFF7F97B8);
+  static const Color bluePetrol = Color(0xFF4A7C99);
+  static const Color beigeLight = Color(0xFFF5F3E7);
 }
+
+
+
+
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
@@ -31,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFFBF0),
+      backgroundColor: Color(0xFFF5F3E7),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -44,20 +51,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 300,
                     width: double.infinity,
                     child: Image.asset("imagens/habito.png", fit: BoxFit.cover),
-                  ),
-
-                  Container(
-                    height: 300,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Colors.black.withOpacity(0.3),
-                          Colors.black.withOpacity(0.6),
-                        ],
-                      ),
-                    ),
                   ),
                 ],
               ),
@@ -120,14 +113,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
       // Bottom Navigation Bar
       bottomNavigationBar: Container(
-        margin: const EdgeInsets.all(20),
-        padding: const EdgeInsets.symmetric(vertical: 16),
+        height: 80,
+        padding: const EdgeInsets.symmetric(vertical: 5, horizontal:5 ),
         decoration: BoxDecoration(
           color: const Color(0xFFB8D4E5),
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(60),
         ),
         child: Row(
-          
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             _buildNavItem(Icons.home, 0),
@@ -154,8 +146,8 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         child: Icon(
           icon,
-          color: isSelected ? Colors.white : const Color.fromARGB(255, 255, 255, 255),
-          size: 40,
+          color: isSelected ?  Color(0xFF4A7C99): Color(0xFF7F97B8),
+          size: 30,
         ),
       ),
     );
