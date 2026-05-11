@@ -114,7 +114,8 @@ class _HomeScreenState extends State<HomeScreen> {
       // Bottom Navigation Bar
       bottomNavigationBar: Container(
         height: 80,
-        padding: const EdgeInsets.symmetric(vertical: 5, horizontal:5 ),
+        margin: const EdgeInsets.all(15),
+        padding: const EdgeInsets.symmetric(vertical: 2, horizontal:5 ),
         decoration: BoxDecoration(
           color: const Color(0xFFB8D4E5),
           borderRadius: BorderRadius.circular(60),
