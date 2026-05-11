@@ -1,6 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:lester/modelos/livros.dart';
 
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: "Login",
+      theme: ThemeData(primaryColor: Colors.blue),
+      home: Telapesquisa(),
+    );
+  }
+}
+
+
 class Telapesquisa extends StatefulWidget {
   const Telapesquisa({Key? key}) : super(key: key);
 

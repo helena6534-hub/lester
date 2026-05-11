@@ -214,7 +214,7 @@ class _CadastroScreenState extends State<CadastroScreen> {
                           width: double.infinity,
                           child: ElevatedButton(
                             onPressed: () {
-                              // Lógica de cadastro
+                              Navigator.pop(context);
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFF4A7C99),

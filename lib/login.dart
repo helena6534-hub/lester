@@ -3,9 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:lester/cadastro.dart';
 import 'package:lester/telainicial.dart';
 
-void main() {
-  runApp(MyApp());
-}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

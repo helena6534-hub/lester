@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'cadastro.dart';
 
+void main() {
+  runApp(MyApp());
+}
+
 class Telainicial extends StatelessWidget {
   const Telainicial({super.key});
 
@@ -123,6 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
           borderRadius: BorderRadius.circular(30),
         ),
         child: Row(
+          
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             _buildNavItem(Icons.home, 0),
@@ -142,12 +147,14 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: isSelected ? const Color(0xFF5B94B8) : Colors.transparent,
           shape: BoxShape.circle,
+          boxShadow: [
+        ],
+        
         ),
         child: Icon(
           icon,
-          color: isSelected ? Colors.white : const Color(0xFF5B94B8),
+          color: isSelected ? Colors.white : const Color.fromARGB(255, 255, 255, 255),
           size: 40,
         ),
       ),
