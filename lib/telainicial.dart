@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Text(
                   'Obras em destaque',
                   style: TextStyle(
-                    fontSize: 35,
+                    fontSize: 30,
                     fontWeight: FontWeight.w500,
                     color: Color(0xFF5B94B8),
                   ),
@@ -78,13 +78,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
-                      width: 170, // largura
-                      height: 250, // altura
-                      child: _buildBookCard(
-                        '1984',
-                        'George Orwell',
-                        Colors.red.shade700,
-                        icon: Icons.remove_red_eye,
+                      width: 170,
+                      height: 250,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Image.asset(
+                          "imagens/crime.jpg",
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ],
@@ -98,9 +99,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Text(
                   'Screllers da semana',
                   style: TextStyle(
-                    fontSize: 35,
+                    fontSize: 30,
                     fontWeight: FontWeight.w500,
                     color: Color(0xFF5B94B8),
+
                   ),
                 ),
               ),
