@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lester/telapesquisa.dart';
 import 'cadastro.dart';
-
-void main() {
-  runApp(MyApp());
-}
 
 class Telainicial extends StatelessWidget {
   const Telainicial({super.key});
@@ -27,10 +24,6 @@ class HomeScreen extends StatefulWidget {
   static const Color bluePetrol = Color(0xFF4A7C99);
   static const Color beigeLight = Color(0xFFF5F3E7);
 }
-
-
-
-
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
@@ -102,7 +95,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     fontSize: 30,
                     fontWeight: FontWeight.w500,
                     color: Color(0xFF5B94B8),
-
                   ),
                 ),
               ),
@@ -117,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: Container(
         height: 80,
         margin: const EdgeInsets.all(15),
-        padding: const EdgeInsets.symmetric(vertical: 2, horizontal:5 ),
+        padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
         decoration: BoxDecoration(
           color: const Color(0xFFB8D4E5),
           borderRadius: BorderRadius.circular(60),
@@ -137,19 +129,29 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildNavItem(IconData icon, int index) {
     final isSelected = _selectedIndex == index;
+    if (index == 0) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Telainicial()),
+      );
+    }
+    if (index == 1) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Telapesquisa()),
+      );
+    }
     return GestureDetector(
       onTap: () => setState(() => _selectedIndex = index),
       child: Container(
         padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          boxShadow: [
+        decoration: BoxDecoration(shape: BoxShape.circle, boxShadow: [
         ],
         
         ),
         child: Icon(
           icon,
-          color: isSelected ?  Color(0xFF4A7C99): Color(0xFF7F97B8),
+          color: isSelected ? Color(0xFF4A7C99) : Color(0xFF7F97B8),
           size: 30,
         ),
       ),
