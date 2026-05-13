@@ -58,7 +58,11 @@ class _loginState extends State<login> {
 
   // Implementar lógica de recuperação de senha
   void _handleForgotPassword() {
-    debugPrint('Esqueceu a senha');
+    debugPrint('Nao quero cadastrar');
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Telainicial()),
+    );
   }
 
   // Implementar lógica de cadastro
@@ -216,7 +220,7 @@ class _loginState extends State<login> {
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
                 child: const Text(
-                  'Esqueceu sua senha?',
+                  'Nao quero cadastrar',
                   style: TextStyle(fontSize: 14, color: blueMedium),
                 ),
               ),

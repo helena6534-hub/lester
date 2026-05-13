@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:lester/telapesquisa.dart';
 import 'cadastro.dart';
 
+
+
 class Telainicial extends StatelessWidget {
   const Telainicial({super.key});
 
@@ -23,7 +25,11 @@ class HomeScreen extends StatefulWidget {
   static const Color blueMedium = Color(0xFF7F97B8);
   static const Color bluePetrol = Color(0xFF4A7C99);
   static const Color beigeLight = Color(0xFFF5F3E7);
+  static const Color blueLight = Color(0xFFA3CEE8);
 }
+
+
+
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
@@ -87,17 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 32),
 
               // Scrollers da semana
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Text(
-                  'Screllers da semana',
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFF5B94B8),
-                  ),
-                ),
-              ),
+              
 
               const SizedBox(height: 100),
             ],
@@ -109,11 +105,16 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: Container(
         height: 80,
         margin: const EdgeInsets.all(15),
-        padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
+        padding: const EdgeInsets.symmetric(
+          vertical: 2,
+          horizontal: 5,
+        ),
+
         decoration: BoxDecoration(
           color: const Color(0xFFB8D4E5),
           borderRadius: BorderRadius.circular(60),
         ),
+
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -127,36 +128,61 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildNavItem(IconData icon, int index) {
-    final isSelected = _selectedIndex == index;
-    if (index == 0) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => Telainicial()),
-      );
-    }
-    if (index == 1) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => Telapesquisa()),
-      );
-    }
-    return GestureDetector(
-      onTap: () => setState(() => _selectedIndex = index),
-      child: Container(
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(shape: BoxShape.circle, boxShadow: [
-        ],
-        
-        ),
-        child: Icon(
-          icon,
-          color: isSelected ? Color(0xFF4A7C99) : Color(0xFF7F97B8),
-          size: 30,
-        ),
+ Widget _buildNavItem(IconData icon, int index) {
+
+  final isSelected = _selectedIndex == index;
+
+  return GestureDetector(
+
+    onTap: () {
+
+      setState(() {
+        _selectedIndex = index;
+      });
+
+      // Navegação entre páginas
+      if (index == 0) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Telainicial(),
+          ),
+        );
+      }
+
+      if (index == 1) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Telapesquisa(),
+          ),
+        );
+      }
+
+      
+    },
+
+    child: Container(
+      padding: const EdgeInsets.all(12),
+
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+
+        color: isSelected
+            ? Color(0xFFA3CEE8)
+            : Colors.transparent,
       ),
-    );
-  }
+
+      child: Icon(
+        icon,
+        color: isSelected
+            ? const Color(0xFF4A7C99)
+            : const Color(0xFF7F97B8),
+        size: 30,
+      ),
+    ),
+  );
+}
 
   Widget _buildBookCard(
     String title,
