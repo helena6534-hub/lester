@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lester/telainicial.dart';
+import 'package:lester/telainicial.dart';
 
 void main() {
+  runApp(const MyApp());
   runApp(const MyApp());
 }
 
@@ -13,9 +15,16 @@ class MyApp extends StatelessWidget {
   static const Color beigeLight = Color(0xFFF5F3E7);
   static const Color blueLight = Color(0xFFA3CEE8);
 
+
+  static const Color blueMedium = Color(0xFF7F97B8);
+  static const Color bluePetrol = Color(0xFF4A7C99);
+  static const Color beigeLight = Color(0xFFF5F3E7);
+  static const Color blueLight = Color(0xFFA3CEE8);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Tela de Pesquisa',
       debugShowCheckedModeBanner: false,
       title: 'Tela de Pesquisa',
       theme: ThemeData(
@@ -28,6 +37,7 @@ class MyApp extends StatelessWidget {
 }
 
 class Telapesquisa extends StatefulWidget {
+  const Telapesquisa({super.key});
   const Telapesquisa({super.key});
 
   @override
