@@ -21,7 +21,7 @@ class CadastroScreen extends StatefulWidget {
   @override
   State<CadastroScreen> createState() => _CadastroScreenState();
 }
-
+ 
 class _CadastroScreenState extends State<CadastroScreen> {
   bool isLeitor = true;
   final TextEditingController emailController = TextEditingController();

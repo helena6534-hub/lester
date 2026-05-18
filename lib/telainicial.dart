@@ -116,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-
+ 
               const SizedBox(height: 30),
               _buildPodium(),
               const SizedBox(height: 40),
