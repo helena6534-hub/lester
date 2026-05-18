@@ -8,6 +8,11 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  static const Color blueMedium = Color(0xFF7F97B8);
+  static const Color bluePetrol = Color(0xFF4A7C99);
+  static const Color beigeLight = Color(0xFFF5F3E7);
+  static const Color blueLight = Color(0xFFA3CEE8);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -15,7 +20,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: const Color(0xFFFFF8E7),
+        scaffoldBackgroundColor: const Color(0xFFFFFAEB),
       ),
       home: const Telapesquisa(),
     );
@@ -46,27 +51,10 @@ class _TelapesquisaState extends State<Telapesquisa> {
   final List<Map<String, dynamic>> _mostSearchedBooks = [
     {
       'id': 1,
-      'title': '1984',
-      'author': 'George Orwell',
-      'cover':
-          'https://images.unsplash.com/photo-1633477189729-9290b3261d0a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
-      'likes': 2785,
-    },
-    {
-      'id': 2,
       'title': 'Crime e Castigo',
-      'author': 'Dostoiévski',
-      'cover':
-          'https://images.unsplash.com/photo-1476081718509-d5d0b661a376?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
-      'likes': 8600,
-    },
-    {
-      'id': 3,
-      'title': 'Harry Potter',
-      'author': 'J.K. Rowling',
-      'cover':
-          'https://images.unsplash.com/photo-1491841573634-28140fc7ced7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
-      'likes': 12357,
+      'author': 'Fiodor Dostoievski',
+      'cover': 'https://m.media-amazon.com/images/I/916WkSH4cGL.jpg',
+      'likes': 2785,
     },
   ];
 
@@ -91,7 +79,7 @@ class _TelapesquisaState extends State<Telapesquisa> {
                     // Search Bar
                     Container(
                       decoration: BoxDecoration(
-                        color: const Color(0xFFC5DAE8),
+                        color: const Color.fromARGB(255, 205, 218, 226),
                         borderRadius: BorderRadius.circular(30),
                       ),
                       child: TextField(
@@ -99,14 +87,14 @@ class _TelapesquisaState extends State<Telapesquisa> {
                         decoration: InputDecoration(
                           hintText: 'Busca',
                           hintStyle: const TextStyle(
-                            color: Color(0xFF5B8FA3),
+                            color: Color(0xFF7F97B8),
                             fontSize: 18,
                           ),
                           prefixIcon: const Padding(
                             padding: EdgeInsets.only(left: 24, right: 16),
                             child: Icon(
                               Icons.search,
-                              color: Color(0xFF5B8FA3),
+                              color: Color(0xFF7F97B8),
                               size: 24,
                             ),
                           ),
@@ -175,13 +163,14 @@ class _TelapesquisaState extends State<Telapesquisa> {
                     GridView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 5,
-                            crossAxisSpacing: 16,
-                            mainAxisSpacing: 16,
-                            childAspectRatio: 0.60,
-                          ),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: MediaQuery.of(context).size.width < 600
+                            ? 3
+                            : 6,
+                        crossAxisSpacing: 8,
+                        mainAxisSpacing: 8,
+                        childAspectRatio: 0.55,
+                      ),
                       itemCount: _mostSearchedBooks.length,
                       itemBuilder: (context, index) {
                         final book = _mostSearchedBooks[index];
