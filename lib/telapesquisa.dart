@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lester/telainicial.dart';
-import 'package:lester/telainicial.dart';
 
 void main() {
-  runApp(const MyApp());
   runApp(const MyApp());
 }
 
@@ -14,15 +12,12 @@ class MyApp extends StatelessWidget {
   static const Color bluePetrol = Color(0xFF4A7C99);
   static const Color beigeLight = Color(0xFFF5F3E7);
   static const Color blueLight = Color(0xFFA3CEE8);
-
-
-
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Tela de Pesquisa',
       debugShowCheckedModeBanner: false,
-
       theme: ThemeData(
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: const Color(0xFFFFFAEB),
@@ -35,14 +30,12 @@ class MyApp extends StatelessWidget {
 class Telapesquisa extends StatefulWidget {
   const Telapesquisa({super.key});
 
-
-
   @override
   State<Telapesquisa> createState() => _TelapesquisaState();
 }
 
 class _TelapesquisaState extends State<Telapesquisa> {
-  final int _selectedIndex = 0;
+  int _selectedIndex = 0;
 
   final TextEditingController _searchController =
       TextEditingController();
@@ -52,8 +45,9 @@ class _TelapesquisaState extends State<Telapesquisa> {
   final List<String> _filters = [
     'Livros',
     'Leitores',
-    'Autores'
+    'Autores',
   ];
+
   // LIVROS
   final List<Map<String, dynamic>> _mostSearchedBooks = [
     {
@@ -63,15 +57,17 @@ class _TelapesquisaState extends State<Telapesquisa> {
       'likes': 2785,
     },
   ];
+
   // LEITORES
   final List<Map<String, dynamic>> _mostSearchedReaders = [
     {
       'name': 'Ana Clara',
       'lesters': '2300 Seguidores',
       'color': const Color.fromARGB(255, 163, 91, 91),
-      'avatar': Icons.person,  
+      'avatar': Icons.person,
     },
   ];
+
   // AUTORES
   final List<Map<String, dynamic>> _mostSearchedAuthors = [
     {
@@ -90,7 +86,6 @@ class _TelapesquisaState extends State<Telapesquisa> {
 
   @override
   Widget build(BuildContext context) {
-    // ESCOLHE A LISTA
     List<Map<String, dynamic>> displayedItems;
 
     if (_activeFilter == 'Livros') {
@@ -116,7 +111,11 @@ class _TelapesquisaState extends State<Telapesquisa> {
                     Container(
                       decoration: BoxDecoration(
                         color: const Color.fromARGB(
-                            255, 205, 218, 226),
+                          255,
+                          205,
+                          218,
+                          226,
+                        ),
                         borderRadius:
                             BorderRadius.circular(30),
                       ),
@@ -131,7 +130,9 @@ class _TelapesquisaState extends State<Telapesquisa> {
                           ),
                           prefixIcon: Padding(
                             padding: EdgeInsets.only(
-                                left: 24, right: 16),
+                              left: 24,
+                              right: 16,
+                            ),
                             child: Icon(
                               Icons.search,
                               color: Color(0xFF7F97B8),
@@ -153,16 +154,19 @@ class _TelapesquisaState extends State<Telapesquisa> {
                     ),
 
                     const SizedBox(height: 24),
+
                     // FILTROS
                     Row(
-                      children: _filters.map((filter) {
+                      children:
+                          _filters.map((filter) {
                         final isActive =
                             _activeFilter == filter;
 
                         return Padding(
                           padding:
                               const EdgeInsets.only(
-                                  right: 12),
+                            right: 12,
+                          ),
                           child: FilterChip(
                             label: Text(filter),
                             selected: isActive,
@@ -174,37 +178,41 @@ class _TelapesquisaState extends State<Telapesquisa> {
                             },
                             backgroundColor:
                                 const Color(
-                                    0xFFD4E6EE),
+                              0xFFD4E6EE,
+                            ),
                             selectedColor:
                                 const Color(
-                                    0xFFA8C5D6),
+                              0xFFA8C5D6,
+                            ),
                             labelStyle: TextStyle(
                               color: isActive
                                   ? Colors.white
                                   : const Color(
-                                      0xFF7F97B8),
+                                      0xFF7F97B8,
+                                    ),
                               fontWeight:
                                   FontWeight.w500,
                             ),
                             padding:
-                                const EdgeInsets
-                                    .symmetric(
+                                const EdgeInsets.symmetric(
                               horizontal: 16,
                               vertical: 8,
                             ),
                             shape:
                                 RoundedRectangleBorder(
                               borderRadius:
-                                  BorderRadius
-                                      .circular(20),
-                              side:
-                                  BorderSide.none,
+                                  BorderRadius.circular(
+                                20,
+                              ),
+                              side: BorderSide.none,
                             ),
                           ),
                         );
                       }).toList(),
                     ),
+
                     const SizedBox(height: 32),
+
                     // TITULO
                     const Text(
                       'Mais buscados',
@@ -216,115 +224,140 @@ class _TelapesquisaState extends State<Telapesquisa> {
                     ),
 
                     const SizedBox(height: 24),
-                    // GRID
-                    GridView.builder(
-                      shrinkWrap: true,
-                      physics:
-                          const NeverScrollableScrollPhysics(),
-                      gridDelegate:
-                          SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount:
-                            MediaQuery.of(context)
-                                        .size
-                                        .width <
-                                    600
-                                ? 1
-                                : 6,
-                        crossAxisSpacing: 8,
-                        mainAxisSpacing: 8,
-                        childAspectRatio: 0.55,
-                      ),
-                      itemCount:
-                          displayedItems.length,
-                      itemBuilder:
-                          (context, index) {
-                        final item =
-                            displayedItems[index];
-                        // LIVROS
-                        if (_activeFilter ==
-                            'Livros') {
-                          return Column(
-                            children: [
-                              Expanded(
-                                child: ClipRRect(
-                                  borderRadius:
-                                      BorderRadius
-                                          .circular(
-                                              20),
-                                  child:
-                                      Image.network(
-                                    item['image'],
-                                    fit:
-                                        BoxFit
-                                            .cover,
-                                    width: double
-                                        .infinity,
-                                  ),
-                                ),
-                              ),
 
-                              const SizedBox(
-                                  height: 8),
+                    // LIVROS
+                    _activeFilter == 'Livros'
+                        ? GridView.builder(
+                            shrinkWrap: true,
+                            physics:
+                                const NeverScrollableScrollPhysics(),
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount:
+                                  MediaQuery.of(context)
+                                              .size
+                                              .width <
+                                          600
+                                      ? 1
+                                      : 6,
+                              crossAxisSpacing: 8,
+                              mainAxisSpacing: 8,
+                              childAspectRatio: 0.55,
+                            ),
+                            itemCount:
+                                displayedItems.length,
+                            itemBuilder:
+                                (context, index) {
+                              final item =
+                                  displayedItems[index];
 
-                              Text(
-                                item['name'],
-                                style:
-                                    const TextStyle(
-                                  color: Color(
-                                      0xFF5B8FA3),
-                                  fontWeight:
-                                      FontWeight
-                                          .bold,
-                                  fontSize: 14,
-                                ),
-                                textAlign:
-                                    TextAlign
-                                        .center,
-                              ),
-
-                              const SizedBox(
-                                  height: 4),
-
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment
-                                        .center,
+                              return Column(
                                 children: [
-                                  const Icon(
-                                    Icons.favorite,
-                                    color: Color(
-                                        0xFF5B8FA3),
-                                    size: 20,
+                                  Expanded(
+                                    child: ClipRRect(
+                                      borderRadius:
+                                          BorderRadius.circular(
+                                        20,
+                                      ),
+                                      child:
+                                          Image.network(
+                                        item['image'],
+                                        fit:
+                                            BoxFit.cover,
+                                        width:
+                                            double.infinity,
+                                      ),
+                                    ),
                                   ),
+
                                   const SizedBox(
-                                      width: 4),
+                                    height: 8,
+                                  ),
+
                                   Text(
-                                    '${item['likes']}',
+                                    item['name'],
                                     style:
                                         const TextStyle(
                                       color: Color(
-                                          0xFF5B8FA3),
-                                      fontSize:
-                                          14,
+                                        0xFF5B8FA3,
+                                      ),
+                                      fontWeight:
+                                          FontWeight
+                                              .bold,
+                                      fontSize: 14,
                                     ),
+                                    textAlign:
+                                        TextAlign.center,
+                                  ),
+
+                                  const SizedBox(
+                                    height: 4,
+                                  ),
+
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment
+                                            .center,
+                                    children: [
+                                      const Icon(
+                                        Icons.favorite,
+                                        color: Color(
+                                          0xFF5B8FA3,
+                                        ),
+                                        size: 20,
+                                      ),
+
+                                      const SizedBox(
+                                        width: 4,
+                                      ),
+
+                                      Text(
+                                        '${item['likes']}',
+                                        style:
+                                            const TextStyle(
+                                          color: Color(
+                                            0xFF5B8FA3,
+                                          ),
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ],
-                              ),
-                            ],
-                          );
-                        }
+                              );
+                            },
+                          )
+
                         // LEITORES E AUTORES
-                              return SizedBox(
-                              width: 300,
-                              height: 120,
-                              child: Container(
-                                margin: const EdgeInsets.only(bottom: 16),
-                                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                                decoration: BoxDecoration(
-                                  color: Color(0xFFF5F3E7),
-                                  borderRadius: BorderRadius.circular(12),
+                        : Column(
+                            children:
+                                displayedItems.map((item) {
+                              return Container(
+                                margin:
+                                    const EdgeInsets.only(
+                                  bottom: 16,
+                                ),
+                                padding:
+                                    const EdgeInsets.symmetric(
+                                  vertical: 12,
+                                  horizontal: 16,
+                                ),
+                                decoration:
+                                    BoxDecoration(
+                                  color: const Color(
+                                    0xFFF5F3E7,
+                                  ),
+                                  borderRadius:
+                                      BorderRadius.circular(
+                                    12,
+                                  ),
                                   border: Border.all(
-                                    color: Color(0xFF4A7C99).withOpacity(0.1),
+                                    color:
+                                        const Color(
+                                      0xFF4A7C99,
+                                    ).withOpacity(
+                                      0.1,
+                                    ),
                                     width: 2,
                                   ),
                                 ),
@@ -333,50 +366,64 @@ class _TelapesquisaState extends State<Telapesquisa> {
                                   children: [
                                     CircleAvatar(
                                       radius: 30,
-                                      backgroundColor: item['color'],
+                                      backgroundColor:
+                                          item['color'],
                                       child: Icon(
                                         item['avatar'],
                                         size: 35,
-                                        color: Colors.white,
+                                        color:
+                                            Colors.white,
                                       ),
                                     ),
 
-                                    const SizedBox(width: 16),
+                                    const SizedBox(
+                                      width: 16,
+                                    ),
 
                                     Expanded(
                                       child: Text(
                                         item['name'],
-                                        style: const TextStyle(
+                                        style:
+                                            const TextStyle(
                                           fontSize: 18,
-                                          fontWeight: FontWeight.w500,
-                                          color: Color(0xFF5B9AB8),
+                                          fontWeight:
+                                              FontWeight
+                                                  .w500,
+                                          color: Color(
+                                            0xFF5B9AB8,
+                                          ),
                                         ),
                                       ),
                                     ),
 
                                     Text(
                                       item['lesters'],
-                                      style: const TextStyle(
+                                      style:
+                                          const TextStyle(
                                         fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                        color: Color(0xFF5B9AB8),
+                                        fontWeight:
+                                            FontWeight
+                                                .w600,
+                                        color: Color(
+                                          0xFF5B9AB8,
+                                        ),
                                       ),
                                     ),
                                   ],
                                 ),
-                              ),
-                            );
-                        
-                          },
-                        ),
-                    const SizedBox(height: 100),
-                                ],
-                              ),
-                            ),
+                              );
+                            }).toList(),
                           ),
-                        ],
-                      ),
-                    ),
+
+                    const SizedBox(height: 100),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+
       // BOTÃO DE NAVEGAÇÃO
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
@@ -394,7 +441,7 @@ class _TelapesquisaState extends State<Telapesquisa> {
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
-                      Telainicial(),
+                      const Telainicial(),
                 ),
               );
             }
@@ -410,7 +457,7 @@ class _TelapesquisaState extends State<Telapesquisa> {
             }
           },
           type: BottomNavigationBarType.fixed,
-          backgroundColor: const Color.fromARGB(0, 255, 255, 255),
+          backgroundColor: Colors.transparent,
           elevation: 0,
           selectedItemColor:
               const Color(0xFF4A7A8F),
