@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lester/login.dart';
-import 'package:flutter/services.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

@@ -42,7 +42,7 @@ class Telapesquisa extends StatefulWidget {
 }
 
 class _TelapesquisaState extends State<Telapesquisa> {
-  int _selectedIndex = 0;
+  final int _selectedIndex = 0;
 
   final TextEditingController _searchController =
       TextEditingController();
