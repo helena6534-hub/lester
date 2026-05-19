@@ -16,17 +16,13 @@ class MyApp extends StatelessWidget {
   static const Color blueLight = Color(0xFFA3CEE8);
 
 
-  static const Color blueMedium = Color(0xFF7F97B8);
-  static const Color bluePetrol = Color(0xFF4A7C99);
-  static const Color beigeLight = Color(0xFFF5F3E7);
-  static const Color blueLight = Color(0xFFA3CEE8);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Tela de Pesquisa',
       debugShowCheckedModeBanner: false,
-      title: 'Tela de Pesquisa',
+
       theme: ThemeData(
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: const Color(0xFFFFFAEB),
@@ -38,7 +34,8 @@ class MyApp extends StatelessWidget {
 
 class Telapesquisa extends StatefulWidget {
   const Telapesquisa({super.key});
-  const Telapesquisa({super.key});
+
+
 
   @override
   State<Telapesquisa> createState() => _TelapesquisaState();
@@ -317,50 +314,58 @@ class _TelapesquisaState extends State<Telapesquisa> {
                           );
                         }
                         // LEITORES E AUTORES
-                        return SizedBox(
-                          width: 300,
-                          height: 120,
-                          child:  Container(
-                          margin: const EdgeInsets.only(bottom: 16),
-                          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                          decoration: BoxDecoration(
-                            color: Color(0xFFF5F3E7),
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: Color(0xFF4A7C99).withOpacity(0.1), width: 2),
-                          ),
-                          )
-                          child: Row(
-                            children: [
-                              CircleAvatar(
-                                radius: 30,
-                                backgroundColor: item['color'],
-                                child: Icon(item['avatar'], size: 35, color: Colors.white),
-                              ),
-
-                              const SizedBox(width: 16),
-
-                              Expanded(
-                                child: Text(
-                                  item['name'],
-                                  style: const TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                    color: Color(0xFF5B9AB8),
+                              return SizedBox(
+                              width: 300,
+                              height: 120,
+                              child: Container(
+                                margin: const EdgeInsets.only(bottom: 16),
+                                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                                decoration: BoxDecoration(
+                                  color: Color(0xFFF5F3E7),
+                                  borderRadius: BorderRadius.circular(12),
+                                  border: Border.all(
+                                    color: Color(0xFF4A7C99).withOpacity(0.1),
+                                    width: 2,
                                   ),
                                 ),
-                              ),
 
-                              Text(
-                                item['lesters'],
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: Color(0xFF5B9AB8),
+                                child: Row(
+                                  children: [
+                                    CircleAvatar(
+                                      radius: 30,
+                                      backgroundColor: item['color'],
+                                      child: Icon(
+                                        item['avatar'],
+                                        size: 35,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+
+                                    const SizedBox(width: 16),
+
+                                    Expanded(
+                                      child: Text(
+                                        item['name'],
+                                        style: const TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w500,
+                                          color: Color(0xFF5B9AB8),
+                                        ),
+                                      ),
+                                    ),
+
+                                    Text(
+                                      item['lesters'],
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                        color: Color(0xFF5B9AB8),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ],
-                          ),
-                        );
+                            );
                         
                           },
                         ),
