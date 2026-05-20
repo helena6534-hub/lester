@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lester/perfil.dart';
 import 'package:lester/telainicial.dart';
 
 void main() {
@@ -452,6 +453,16 @@ class _TelapesquisaState extends State<Telapesquisa> {
                 MaterialPageRoute(
                   builder: (context) =>
                       const Telapesquisa(),
+                ),
+              );
+            }
+
+            if (index == 2) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      const Perfil(),
                 ),
               );
             }

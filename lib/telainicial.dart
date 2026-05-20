@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lester/perfil.dart';
 import 'package:lester/telapesquisa.dart';
 
 void main() {
@@ -41,11 +42,29 @@ class _HomeScreenState extends State<HomeScreen> {
       _selectedIndex = index;
     });
 
+    if (index == 0) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const Telainicial(),
+          ),
+        );
+      }
+
     if (index == 1) {
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => Telapesquisa(),
+        ),
+      );
+    }
+
+    if (index == 2) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const Perfil(),
         ),
       );
     }
