@@ -404,7 +404,7 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 16),
       decoration: BoxDecoration(
-        color: const  Color(0xFFC5D9E0),
+        color: const Color(0xFFF5F3E7),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: bluePetrol.withOpacity(0.1),
