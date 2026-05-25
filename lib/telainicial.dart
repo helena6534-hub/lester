@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lester/livro.dart';
 import 'package:lester/perfil.dart';
 import 'package:lester/telapesquisa.dart';
 
@@ -68,12 +69,22 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       );
     }
+
+    if (index == 3) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      const livro(),
+                ),
+              );
+            }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFFAEB),
+      backgroundColor: const Color(0xFFF5F3E7),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

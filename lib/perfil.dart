@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lester/livro.dart';
 import 'package:lester/telainicial.dart';
 import 'package:lester/telapesquisa.dart';
 
@@ -14,7 +15,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'User Profile',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(useMaterial3: true),
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
       home: const Perfil(),
     );
   }
@@ -33,8 +36,16 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
   int _selectedIndex = 2;
   late int _likes;
   bool _liked = false;
+  bool _seguindo = false;
   late AnimationController _controller;
   late Animation<double> _scaleAnim;
+
+  // Mesmas cores da tela inicial
+  static const Color blueMedium  = Color(0xFF7F97B8);
+  static const Color bluePetrol  = Color(0xFF4A7C99);
+  static const Color beigeLight  = Color(0xFFF5F3E7);
+  static const Color blueLight   = Color(0xFFA3CEE8);
+  static const Color textBlue    = Color(0xFF5B8FA3);
 
   @override
   void initState() {
@@ -55,6 +66,37 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
     super.dispose();
   }
 
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+
+    if (index == 0) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const Telainicial()),
+      );
+    }
+    if (index == 1) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const Telapesquisa()),
+      );
+    }
+    if (index == 2) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const Perfil()),
+      );
+    }
+    if (index == 3) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const livro()),
+      );
+    }
+  }
+
   void _toggleLike() {
     setState(() {
       if (_liked) {
@@ -71,192 +113,207 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFC5D9E0),
-      body: Stack(
-        children: [
-          // Fundo dividido em duas cores
-          Column(
+      backgroundColor: const Color(0xFFF5F3E7),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(flex: 4, child: Container(color: const Color(0xFFC5D9E0))),
-              Expanded(flex: 6, child: Container(color: const Color(0xFFF5EFD8))),
-            ],
-          ),
+              // ── Header com botão de voltar ──────────────────────
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                child: IconButton(
+                  onPressed: () => Navigator.maybePop(context),
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    size: 32,
+                    color: bluePetrol,
+                  ),
+                ),
+              ),
 
-          // Avatar centralizado no topo
-          Positioned(
-            top: MediaQuery.of(context).size.height * 0.12,
-            left: 0,
-            right: 0,
-            child: Center(
-              child: Container(
-                width: 140,
-                height: 140,
-                decoration: BoxDecoration(
-                  color: const Color(0xFFFF9B7A),
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Colors.white, width: 8),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      blurRadius: 20,
-                      offset: const Offset(0, 5),
+              // ── Avatar centralizado ─────────────────────────────
+              Center(
+                child: Container(
+                  width: 130,
+                  height: 130,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFE89A7D),
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: bluePetrol,
+                      width: 3,
+                    ),
+                  ),
+                  child: Center(
+                    child: CustomPaint(
+                      size: const Size(90, 90),
+                      painter: AvatarPainter(),
+                    ),
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 24),
+
+              // ── Nome e profissão ────────────────────────────────
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Eva Barreto',
+                            style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.w500,
+                              color: textBlue,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          const Text(
+                            'Escritora',
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: textBlue,
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          // Seguidores como tag (estilo da tela inicial — pill suave)
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 14,
+                              vertical: 6,
+                            ),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFF5F3E7),
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(
+                                color: bluePetrol.withOpacity(0.15),
+                                width: 2,
+                              ),
+                            ),
+                            child: const Text(
+                              '4587 Seguidores',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                color: textBlue,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // Ícone de seguir
+                    InkWell(
+                      onTap: () => setState(() => _seguindo = !_seguindo),
+                      child: Icon(
+                        _seguindo
+                            ? Icons.person
+                            : Icons.person_add_outlined,
+                        size: 40,
+                        color: _seguindo
+                            ? bluePetrol
+                            : bluePetrol.withOpacity(0.35),
+                      ),
                     ),
                   ],
                 ),
-                child: Center(
-                  child: CustomPaint(
-                    size: const Size(100, 100),
-                    painter: AvatarPainter(),
-                  ),
+              ),
+
+              const SizedBox(height: 24),
+
+              // ── Cards de estatísticas (mesmo estilo do ranking da tela inicial) ──
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  children: [
+                    Expanded(child: _buildStatsCard('Obras', '32')),
+                    const SizedBox(width: 12),
+                    Expanded(child: _buildStatsCard('Screllers', '1.2k')),
+                    const SizedBox(width: 12),
+                    Expanded(child: _buildStatsCard('Lesters', '3.4k')),
+                  ],
                 ),
               ),
-            ),
-          ),
 
-          // Conteúdo principal
-          Column(
-            children: [
-              SizedBox(height: MediaQuery.of(context).size.height * 0.3),
-              Expanded(
-                child: Container(
-                  decoration: const BoxDecoration(
-                    color: Color(0xFFF5EFD8),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30),
+              const SizedBox(height: 24),
+
+              // ── Botão Resenhas ──────────────────────────────────
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Align(
+                  alignment: Alignment.centerLeft, // canto esquerdo
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 12,
                     ),
-                  ),
-                  child: SingleChildScrollView(
-                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-                    child: Column(
-                      children: [
-                        // Nome e profissão
-                        const Text(
-                          'Eva Barreto',
-                          style: TextStyle(
-                            fontSize: 28,
-                            color: Color(0xFF0B5F7D),
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        const Text(
-                          'Escritora',
-                          style: TextStyle(fontSize: 20, color: Color(0xFF5899B3)),
-                        ),
-                        const SizedBox(height: 24),
-
-                        // Botão Seguir
-                        SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF0B5F7D),
-                              foregroundColor: Colors.white,
-                              padding: const EdgeInsets.symmetric(vertical: 16),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                            ),
-                            child: const Text('Seguir', style: TextStyle(fontSize: 18)),
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-
-                        // Seguidores
-                        const Text(
-                          '4587 Seguidores',
-                          style: TextStyle(fontSize: 16, color: Color(0xFF5899B3)),
-                        ),
-                        const SizedBox(height: 24),
-
-                        // Cards de estatísticas
-                        Row(
-                          children: [
-                            Expanded(child: _buildCard('Obras')),
-                            const SizedBox(width: 12),
-                            Expanded(child: _buildCard('Screllers')),
-                            const SizedBox(width: 12),
-                            Expanded(child: _buildCard('Lesters')),
-                          ],
-                        ),
-                        const SizedBox(height: 24),
-
-                        // Botão Resenhas
-                        SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF0B5F7D),
-                              foregroundColor: Colors.white,
-                              padding: const EdgeInsets.symmetric(vertical: 16),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                              alignment: Alignment.centerLeft,
-                            ),
-                            child: const Padding(
-                              padding: EdgeInsets.only(left: 16),
-                              child: Text(
-                                'Resenhas',
-                                style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic),
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-
-                        // Card de resenha
-                        _buildResenhaCard(),
-
-                        const SizedBox(height: 100),
-                      ],
+                    decoration: BoxDecoration(
+                      color: bluePetrol,
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                    child: const Text(
+                      'Resenhas',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ),
               ),
+              const SizedBox(height: 20),
+
+              // ── Card de resenha (mesmo estilo dos itens de ranking) ──
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: _buildResenhaCard(),
+              ),
+
+              const SizedBox(height: 100),
             ],
           ),
-        ],
+        ),
       ),
-
-      bottomNavigationBar: _buildBottomNav(),
+      bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 
   // ── Card de resenha ──────────────────────────────────────────────
   Widget _buildResenhaCard() {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.08),
-            blurRadius: 10,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        color: const Color(0xFFF5F3E7),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: bluePetrol.withOpacity(0.1),
+          width: 2,
+        ),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Avatar do usuário
-          Container(
-            width: 44,
-            height: 44,
-            decoration: const BoxDecoration(
-              color: Color(0xFF0B5F7D),
-              shape: BoxShape.circle,
+          // Avatar (mesmo estilo do CircleAvatar do ranking)
+          CircleAvatar(
+            radius: 30,
+            backgroundColor: const Color(0xFFE89A7D),
+            child: const Icon(
+              Icons.person,
+              size: 35,
+              color: Colors.white,
             ),
-            child: const Icon(Icons.person, color: Colors.white, size: 24),
           ),
-          const SizedBox(width: 12),
 
-          // Texto + curtida
+          const SizedBox(width: 16),
+
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -264,19 +321,20 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
                 const Text(
                   '@Eva Barreto',
                   style: TextStyle(
-                    fontSize: 14,
-                    color: Color(0xFF5899B3),
+                    fontSize: 18,
                     fontWeight: FontWeight.w500,
+                    color: Color(0xFF5B9AB8),
+                  ),
+                ),
+                const SizedBox(height: 4),
+                const Text(
+                  'Livro lindo! Superou o meu...',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Color(0xFF5B9AB8),
                   ),
                 ),
                 const SizedBox(height: 8),
-                const Text(
-                  'Livro lindo! Superou o meu...',
-                  style: TextStyle(fontSize: 14, color: Color(0xFF666666)),
-                ),
-                const SizedBox(height: 12),
-
-                // Botão de curtir
                 GestureDetector(
                   onTap: _toggleLike,
                   child: Row(
@@ -286,16 +344,21 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
                         scale: _scaleAnim,
                         child: Icon(
                           _liked ? Icons.favorite : Icons.favorite_border,
-                          color: _liked ? Colors.red : const Color(0xFF0B5F7D),
-                          size: 18,
+                          color: _liked
+                              ? bluePetrol
+                              : bluePetrol.withOpacity(0.4),
+                          size: 20,
                         ),
                       ),
                       const SizedBox(width: 6),
                       Text(
                         '$_likes ${_likes == 1 ? 'Curtida' : 'Curtidas'}',
-                        style: const TextStyle(
-                          fontSize: 14,
-                          color: Color(0xFF0B5F7D),
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: _liked
+                              ? bluePetrol
+                              : const Color(0xFF5B9AB8),
                         ),
                       ),
                     ],
@@ -304,6 +367,7 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
               ],
             ),
           ),
+
           const SizedBox(width: 12),
 
           // Capa do livro
@@ -335,8 +399,43 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
     );
   }
 
-  // ── Bottom Navigation Bar ────────────────────────────────────────
-  Widget _buildBottomNav() {
+  // ── Card de estatística ─────────────────────────────────────────
+  Widget _buildStatsCard(String label, String value) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 16),
+      decoration: BoxDecoration(
+        color: const  Color(0xFFC5D9E0),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: bluePetrol.withOpacity(0.1),
+          width: 2,
+        ),
+      ),
+      child: Column(
+        children: [
+          Text(
+            label,
+            style: const TextStyle(
+              fontSize: 16,
+              color: Color(0xFF5B9AB8),
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            value,
+            style: const TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.w600,
+              color: Color(0xFF5B9AB8),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // ── Bottom Navigation Bar (idêntica à tela inicial) ─────────────
+  Widget _buildBottomNavigationBar() {
     return Container(
       decoration: const BoxDecoration(
         color: Color(0xFFC5DAE8),
@@ -347,21 +446,7 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
       ),
       child: BottomNavigationBar(
         currentIndex: _selectedIndex,
-        onTap: (index) {
-          setState(() => _selectedIndex = index);
-          if (index == 0) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => const Telainicial()),
-            );
-          } else if (index == 1) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => const Telapesquisa()),
-            );
-          }
-          // index == 2 já é a tela atual
-        },
+        onTap: _onItemTapped,
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -371,52 +456,28 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
         showUnselectedLabels: false,
         items: const [
           BottomNavigationBarItem(
-              icon: Icon(Icons.home, size: 28),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.search, size: 28),
-              label: 'Busca',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person, size: 28),
-              label: 'Perfil',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.grid_3x3, size: 28),
-              label: 'Grid',
-            ),
-        ],
-      ),
-    );
-  }
-
-  // ── Card genérico ────────────────────────────────────────────────
-  Widget _buildCard(String label) {
-    return Container(
-      height: 120,
-      decoration: BoxDecoration(
-        color: const Color(0xFFC5D9E0),
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
+            icon: Icon(Icons.home, size: 28),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search, size: 28),
+            label: 'Busca',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person, size: 28),
+            label: 'Perfil',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.grid_3x3, size: 28),
+            label: 'Grid',
           ),
         ],
-      ),
-      child: Center(
-        child: Text(
-          label,
-          style: const TextStyle(fontSize: 16, color: Color(0xFF0B5F7D)),
-        ),
       ),
     );
   }
 }
 
-// ── Avatar customizado ───────────────────────────────────────────────
+// ── Avatar customizado (mantido) ─────────────────────────────────────
 class AvatarPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
@@ -424,23 +485,25 @@ class AvatarPainter extends CustomPainter {
       ..color = const Color(0xFF1E3A5F)
       ..style = PaintingStyle.fill;
 
-    // Cabeça
     canvas.drawCircle(
       Offset(size.width / 2, size.height * 0.35),
       size.width * 0.15,
       paint,
     );
 
-    // Corpo
     final bodyPath = Path()
       ..moveTo(size.width * 0.25, size.height * 0.75)
       ..quadraticBezierTo(
-        size.width * 0.25, size.height * 0.5,
-        size.width * 0.5, size.height * 0.5,
+        size.width * 0.25,
+        size.height * 0.5,
+        size.width * 0.5,
+        size.height * 0.5,
       )
       ..quadraticBezierTo(
-        size.width * 0.75, size.height * 0.5,
-        size.width * 0.75, size.height * 0.75,
+        size.width * 0.75,
+        size.height * 0.5,
+        size.width * 0.75,
+        size.height * 0.75,
       )
       ..close();
 

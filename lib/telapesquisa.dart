@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lester/livro.dart';
 import 'package:lester/perfil.dart';
 import 'package:lester/telainicial.dart';
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: const Color(0xFFFFFAEB),
+        scaffoldBackgroundColor: const Color(0xFFF5F3E7),
       ),
       home: const Telapesquisa(),
     );
@@ -463,6 +464,16 @@ class _TelapesquisaState extends State<Telapesquisa> {
                 MaterialPageRoute(
                   builder: (context) =>
                       const Perfil(),
+                ),
+              );
+            }
+
+            if (index == 3) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      const livro(),
                 ),
               );
             }
