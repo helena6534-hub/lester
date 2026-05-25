@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
+=======
+import 'package:lester/telainicial.dart';
+import 'package:lester/telapesquisa.dart';
+>>>>>>> 3fb7f02faf691b0df749c59a0157d443f75c9b7d
 
 void main() {
   runApp(const MyApp());
@@ -13,11 +18,16 @@ class MyApp extends StatelessWidget {
       title: 'Book Details',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(useMaterial3: true),
+<<<<<<< HEAD
       home: const livro(),
+=======
+      home: const BookDetailsScreen(),
+>>>>>>> 3fb7f02faf691b0df749c59a0157d443f75c9b7d
     );
   }
 }
 
+<<<<<<< HEAD
 class livro extends StatefulWidget {
   const livro({super.key});
 
@@ -26,6 +36,16 @@ class livro extends StatefulWidget {
 }
 
 class _livroState extends State<livro> {
+=======
+class BookDetailsScreen extends StatefulWidget {
+  const BookDetailsScreen({super.key});
+
+  @override
+  State<BookDetailsScreen> createState() => _BookDetailsScreenState();
+}
+
+class _BookDetailsScreenState extends State<BookDetailsScreen> {
+>>>>>>> 3fb7f02faf691b0df749c59a0157d443f75c9b7d
   bool isFavorited = false;
   bool isBookmarked = false;
   bool isReviewLiked = false;
@@ -191,7 +211,11 @@ class _livroState extends State<livro> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         const Text(
+<<<<<<< HEAD
                                           'Crime e Castigo',
+=======
+                                          'Pessoas normais',
+>>>>>>> 3fb7f02faf691b0df749c59a0157d443f75c9b7d
                                           style: TextStyle(
                                             fontSize: 26,
                                             color: Color(0xFF5899B3),
@@ -200,7 +224,11 @@ class _livroState extends State<livro> {
                                         ),
                                         const SizedBox(height: 4),
                                         const Text(
+<<<<<<< HEAD
                                           'Fiódor Dostoiévski',
+=======
+                                          'Sally Rooney',
+>>>>>>> 3fb7f02faf691b0df749c59a0157d443f75c9b7d
                                           style: TextStyle(
                                             fontSize: 18,
                                             color: Color(0xFF5899B3),
@@ -210,7 +238,11 @@ class _livroState extends State<livro> {
                                         // Tags
                                         Row(
                                           children: [
+<<<<<<< HEAD
                                             _buildTag('Suspense'),
+=======
+                                            _buildTag('Romance'),
+>>>>>>> 3fb7f02faf691b0df749c59a0157d443f75c9b7d
                                             const SizedBox(width: 12),
                                             _buildTag('Completa'),
                                           ],
@@ -502,4 +534,8 @@ class _livroState extends State<livro> {
       ),
     );
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 3fb7f02faf691b0df749c59a0157d443f75c9b7d
