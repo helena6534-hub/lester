@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lester/livro.dart';
+import 'package:lester/obrascard.dart';
 import 'package:lester/telainicial.dart';
 import 'package:lester/telapesquisa.dart';
 
@@ -15,9 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'User Profile',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData(primarySwatch: Colors.blue),
       home: const Perfil(),
     );
   }
@@ -34,30 +32,33 @@ class Perfil extends StatefulWidget {
 
 class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
   int _selectedIndex = 2;
+
   late int _likes;
+
   bool _liked = false;
   bool _seguindo = false;
+
   late AnimationController _controller;
   late Animation<double> _scaleAnim;
 
-  // Mesmas cores da tela inicial
-  static const Color blueMedium  = Color(0xFF7F97B8);
-  static const Color bluePetrol  = Color(0xFF4A7C99);
-  static const Color beigeLight  = Color(0xFFF5F3E7);
-  static const Color blueLight   = Color(0xFFA3CEE8);
-  static const Color textBlue    = Color(0xFF5B8FA3);
+  static const Color bluePetrol = Color(0xFF4A7C99);
+  static const Color textBlue = Color(0xFF5B8FA3);
 
   @override
   void initState() {
     super.initState();
+
     _likes = widget.initialLikes;
+
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 150),
     );
-    _scaleAnim = Tween<double>(begin: 1.0, end: 1.3).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeOut),
-    );
+
+    _scaleAnim = Tween<double>(
+      begin: 1.0,
+      end: 1.3,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
   }
 
   @override
@@ -67,9 +68,7 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
   }
 
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    setState(() => _selectedIndex = index);
 
     if (index == 0) {
       Navigator.push(
@@ -77,18 +76,27 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
         MaterialPageRoute(builder: (context) => const Telainicial()),
       );
     }
+
     if (index == 1) {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const Telapesquisa()),
       );
     }
+
     if (index == 2) {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const Perfil()),
       );
     }
+  }
+
+  void _navegarParaObras() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const Obrascard()),
+    );
   }
 
   void _toggleLike() {
@@ -101,6 +109,7 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
         _liked = true;
       }
     });
+
     _controller.forward().then((_) => _controller.reverse());
   }
 
@@ -108,25 +117,15 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F3E7),
+
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // ── Header com botão de voltar ──────────────────────
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                child: IconButton(
-                  onPressed: () => Navigator.maybePop(context),
-                  icon: const Icon(
-                    Icons.arrow_back,
-                    size: 32,
-                    color: bluePetrol,
-                  ),
-                ),
-              ),
+              const SizedBox(height: 16),
 
-              // ── Avatar centralizado ─────────────────────────────
+              // Avatar
               Center(
                 child: Container(
                   width: 130,
@@ -134,10 +133,7 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
                   decoration: BoxDecoration(
                     color: const Color(0xFFE89A7D),
                     shape: BoxShape.circle,
-                    border: Border.all(
-                      color: bluePetrol,
-                      width: 3,
-                    ),
+                    border: Border.all(color: bluePetrol, width: 3),
                   ),
                   child: Center(
                     child: CustomPaint(
@@ -150,7 +146,7 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
 
               const SizedBox(height: 24),
 
-              // ── Nome e profissão ────────────────────────────────
+              // Nome
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
@@ -168,16 +164,16 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
                               color: textBlue,
                             ),
                           ),
+
                           const SizedBox(height: 4),
+
                           const Text(
                             'Escritora',
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: textBlue,
-                            ),
+                            style: TextStyle(fontSize: 20, color: textBlue),
                           ),
+
                           const SizedBox(height: 12),
-                          // Seguidores como tag (estilo da tela inicial — pill suave)
+
                           Container(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 14,
@@ -203,13 +199,15 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
                         ],
                       ),
                     ),
-                    // Ícone de seguir
+
                     InkWell(
-                      onTap: () => setState(() => _seguindo = !_seguindo),
+                      onTap: () {
+                        setState(() {
+                          _seguindo = !_seguindo;
+                        });
+                      },
                       child: Icon(
-                        _seguindo
-                            ? Icons.person
-                            : Icons.person_add_outlined,
+                        _seguindo ? Icons.person : Icons.person_add_outlined,
                         size: 40,
                         color: _seguindo
                             ? bluePetrol
@@ -222,27 +220,160 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
 
               const SizedBox(height: 24),
 
-              // ── Cards de estatísticas (mesmo estilo do ranking da tela inicial) ──
+              // BOTÕES
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
                   children: [
-                    Expanded(child: _buildStatsCard('Obras', '32')),
+                    Expanded(
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(16),
+                        onTap: _navegarParaObras,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 18),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFA3CEE8),
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: const Column(
+                            children: [
+                              Icon(
+                                Icons.menu_book_rounded,
+                                color: Color(0xFF5B8FA3),
+                                size: 26,
+                              ),
+
+                              SizedBox(height: 8),
+
+                              Text(
+                                'Obras',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Color(0xFF5B8FA3),
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+
+                              SizedBox(height: 4),
+
+                              Text(
+                                '32',
+                                style: TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF5B8FA3),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+
                     const SizedBox(width: 12),
-                    Expanded(child: _buildStatsCard('Screllers', '1.2k')),
+
+                    Expanded(
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(16),
+                        onTap: () {},
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 18),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFA3CEE8),
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: const Column(
+                            children: [
+                              Icon(
+                                Icons.groups_rounded,
+                                color: Color(0xFF5B8FA3),
+                                size: 26,
+                              ),
+
+                              SizedBox(height: 8),
+
+                              Text(
+                                'Screllers',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Color(0xFF5B8FA3),
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+
+                              SizedBox(height: 4),
+
+                              Text(
+                                '1.2k',
+                                style: TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF5B8FA3),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+
                     const SizedBox(width: 12),
-                    Expanded(child: _buildStatsCard('Lesters', '3.4k')),
+
+                    Expanded(
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(16),
+                        onTap: () {},
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 18),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFA3CEE8),
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: const Column(
+                            children: [
+                              Icon(
+                                Icons.favorite_rounded,
+                                color: Color(0xFF5B8FA3),
+                                size: 26,
+                              ),
+
+                              SizedBox(height: 8),
+
+                              Text(
+                                'Lesters',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Color(0xFF5B8FA3),
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+
+                              SizedBox(height: 4),
+
+                              Text(
+                                '3.4k',
+                                style: TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF5B8FA3),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
 
               const SizedBox(height: 24),
 
-              // ── Botão Resenhas ──────────────────────────────────
+              // Resenhas
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Align(
-                  alignment: Alignment.centerLeft, // canto esquerdo
+                  alignment: Alignment.centerLeft,
                   child: Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 24,
@@ -263,9 +394,9 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
                   ),
                 ),
               ),
+
               const SizedBox(height: 20),
 
-              // ── Card de resenha (mesmo estilo dos itens de ranking) ──
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: _buildResenhaCard(),
@@ -276,34 +407,26 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
           ),
         ),
       ),
+
       bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 
-  // ── Card de resenha ──────────────────────────────────────────────
   Widget _buildResenhaCard() {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       decoration: BoxDecoration(
         color: const Color(0xFFF5F3E7),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: bluePetrol.withOpacity(0.1),
-          width: 2,
-        ),
+        border: Border.all(color: bluePetrol.withOpacity(0.1), width: 2),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Avatar (mesmo estilo do CircleAvatar do ranking)
           CircleAvatar(
             radius: 30,
             backgroundColor: const Color(0xFFE89A7D),
-            child: const Icon(
-              Icons.person,
-              size: 35,
-              color: Colors.white,
-            ),
+            child: const Icon(Icons.person, size: 35, color: Colors.white),
           ),
 
           const SizedBox(width: 16),
@@ -320,15 +443,16 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
                     color: Color(0xFF5B9AB8),
                   ),
                 ),
+
                 const SizedBox(height: 4),
+
                 const Text(
                   'Livro lindo! Superou o meu...',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Color(0xFF5B9AB8),
-                  ),
+                  style: TextStyle(fontSize: 16, color: Color(0xFF5B9AB8)),
                 ),
+
                 const SizedBox(height: 8),
+
                 GestureDetector(
                   onTap: _toggleLike,
                   child: Row(
@@ -344,15 +468,15 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
                           size: 20,
                         ),
                       ),
+
                       const SizedBox(width: 6),
+
                       Text(
-                        '$_likes ${_likes == 1 ? 'Curtida' : 'Curtidas'}',
+                        '$_likes Curtidas',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
-                          color: _liked
-                              ? bluePetrol
-                              : const Color(0xFF5B9AB8),
+                          color: _liked ? bluePetrol : const Color(0xFF5B9AB8),
                         ),
                       ),
                     ],
@@ -361,77 +485,11 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
               ],
             ),
           ),
-
-          const SizedBox(width: 12),
-
-          // Capa do livro
-          Container(
-            width: 60,
-            height: 90,
-            decoration: BoxDecoration(
-              color: const Color(0xFFB8C945),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: const Center(
-              child: Padding(
-                padding: EdgeInsets.all(8),
-                child: Text(
-                  'PESSOAS\nNORMAIS',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 10,
-                    fontWeight: FontWeight.bold,
-                    height: 1.2,
-                  ),
-                ),
-              ),
-            ),
-          ),
         ],
       ),
     );
   }
 
-  // ── Card de estatística ─────────────────────────────────────────
-  Widget _buildStatsCard(String label, String value) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 16),
-      decoration: BoxDecoration(
-        color: const Color(0xFFA3CEE8),
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          Text(
-            label,
-            style: const TextStyle(
-              fontSize: 16,
-              color: Color(0xFF5B9AB8),
-            ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            value,
-            style: const TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.w600,
-              color: Color(0xFF5B9AB8),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  // ── Bottom Navigation Bar (idêntica à tela inicial) ─────────────
   Widget _buildBottomNavigationBar() {
     return Container(
       decoration: const BoxDecoration(
@@ -452,29 +510,17 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
         showSelectedLabels: false,
         showUnselectedLabels: false,
         items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home, size: 28),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search, size: 28),
-            label: 'Busca',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person, size: 28),
-            label: 'Perfil',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.grid_3x3, size: 28),
-            label: 'Grid',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Busca'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Perfil'),
+          BottomNavigationBarItem(icon: Icon(Icons.grid_3x3), label: 'Grid'),
         ],
       ),
     );
   }
 }
 
-// ── Avatar customizado (mantido) ─────────────────────────────────────
+// ── Avatar ───────────────────────────────────────────────
 class AvatarPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
@@ -508,5 +554,7 @@ class AvatarPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return false;
+  }
 }

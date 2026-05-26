@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lester/livro.dart';
 import 'package:lester/perfil.dart';
 import 'package:lester/telapesquisa.dart';
 
@@ -15,9 +14,7 @@ class Telainicial extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Lêster',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData(primarySwatch: Colors.blue),
       home: const HomeScreen(),
     );
   }
@@ -44,29 +41,23 @@ class _HomeScreenState extends State<HomeScreen> {
     });
 
     if (index == 0) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const Telainicial(),
-          ),
-        );
-      }
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const Telainicial()),
+      );
+    }
 
     if (index == 1) {
       Navigator.push(
         context,
-        MaterialPageRoute(
-          builder: (context) => Telapesquisa(),
-        ),
+        MaterialPageRoute(builder: (context) => Telapesquisa()),
       );
     }
 
     if (index == 2) {
       Navigator.push(
         context,
-        MaterialPageRoute(
-          builder: (context) => const Perfil(),
-        ),
+        MaterialPageRoute(builder: (context) => const Perfil()),
       );
     }
   }
@@ -126,9 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  children: [
-                    _buildBookCard("imagens/crime.jpg"),
-                  ],
+                  children: [_buildBookCard("imagens/crime.jpg")],
                 ),
               ),
 
@@ -176,11 +165,7 @@ class _HomeScreenState extends State<HomeScreen> {
             return Container(
               color: Colors.grey[300],
               child: const Center(
-                child: Icon(
-                  Icons.book,
-                  size: 50,
-                  color: Colors.grey,
-                ),
+                child: Icon(Icons.book, size: 50, color: Colors.grey),
               ),
             );
           },
@@ -192,11 +177,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildPodium() {
     return Column(
       children: [
-        const Icon(
-          Icons.star,
-          color: Color(0xFF4A7C99),
-          size: 125,
-        ),
+        const Icon(Icons.star, color: Color(0xFF4A7C99), size: 125),
 
         const SizedBox(height: 20),
 
@@ -254,9 +235,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
-        children: users
-            .map((user) => _buildRankingItem(user))
-            .toList(),
+        children: users.map((user) => _buildRankingItem(user)).toList(),
       ),
     );
   }
@@ -264,10 +243,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildRankingItem(Map<String, dynamic> user) {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
-      padding: const EdgeInsets.symmetric(
-        vertical: 12,
-        horizontal: 16,
-      ),
+      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       decoration: BoxDecoration(
         color: const Color(0xFFF5F3E7),
         borderRadius: BorderRadius.circular(12),
@@ -281,11 +257,7 @@ class _HomeScreenState extends State<HomeScreen> {
           CircleAvatar(
             radius: 30,
             backgroundColor: user['color'],
-            child: Icon(
-              user['avatar'],
-              size: 35,
-              color: Colors.white,
-            ),
+            child: Icon(user['avatar'], size: 35, color: Colors.white),
           ),
 
           const SizedBox(width: 16),
