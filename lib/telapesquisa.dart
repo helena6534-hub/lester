@@ -467,16 +467,6 @@ class _TelapesquisaState extends State<Telapesquisa> {
                 ),
               );
             }
-
-            if (index == 3) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      const livro(),
-                ),
-              );
-            }
           },
           type: BottomNavigationBarType.fixed,
           backgroundColor: Colors.transparent,

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'tela_lesters.dart';
+import 'tela_screllers.dart';
 
 void main() {
   runApp(const MyApp());
@@ -38,7 +40,6 @@ class _livroState extends State<livro> {
       body: SafeArea(
         child: Column(
           children: [
-            // Header with back button
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Row(
@@ -58,7 +59,6 @@ class _livroState extends State<livro> {
             Expanded(
               child: Stack(
                 children: [
-                  // Two-tone background
                   Column(
                     children: [
                       Expanded(
@@ -72,7 +72,6 @@ class _livroState extends State<livro> {
                     ],
                   ),
 
-                  // Main content
                   SingleChildScrollView(
                     child: Column(
                       children: [
@@ -94,7 +93,7 @@ class _livroState extends State<livro> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(12),
                               child: Image.asset(
-                                'imagens/crime.jpg',
+                                'assets/capa_livro.jpg',
                                 width: 180,
                                 height: 270,
                                 fit: BoxFit.cover,
@@ -105,23 +104,20 @@ class _livroState extends State<livro> {
 
                         const SizedBox(height: 30),
 
-                        // Content Section
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 24),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              // Title, Author and Icons Row
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Expanded(
                                     child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         const Text(
-                                          'Crime e Castigo',
+                                          'Pessoas normais',
                                           style: TextStyle(
                                             fontSize: 26,
                                             color: Color(0xFF5899B3),
@@ -130,17 +126,16 @@ class _livroState extends State<livro> {
                                         ),
                                         const SizedBox(height: 4),
                                         const Text(
-                                          'Fíodor Dostoiévski',
+                                          'Sally Rooney',
                                           style: TextStyle(
                                             fontSize: 18,
                                             color: Color(0xFF5899B3),
                                           ),
                                         ),
                                         const SizedBox(height: 16),
-                                        // Tags
                                         Row(
                                           children: [
-                                            _buildTag('Suspense'),
+                                            _buildTag('Romance'),
                                             const SizedBox(width: 12),
                                             _buildTag('Completa'),
                                           ],
@@ -149,10 +144,8 @@ class _livroState extends State<livro> {
                                     ),
                                   ),
                                   const SizedBox(width: 16),
-                                  // Action Icons
                                   Column(
                                     children: [
-                                      // Heart Icon
                                       InkWell(
                                         onTap: () {
                                           setState(() {
@@ -160,19 +153,14 @@ class _livroState extends State<livro> {
                                           });
                                         },
                                         child: Icon(
-                                          isFavorited
-                                              ? Icons.favorite
-                                              : Icons.favorite_border,
+                                          isFavorited ? Icons.favorite : Icons.favorite_border,
                                           size: 48,
                                           color: isFavorited
                                               ? const Color(0xFF0B5F7D)
-                                              : const Color(
-                                                  0xFF5899B3,
-                                                ).withOpacity(0.4),
+                                              : const Color(0xFF5899B3).withOpacity(0.4),
                                         ),
                                       ),
                                       const SizedBox(height: 12),
-                                      // Bookmark Icon
                                       InkWell(
                                         onTap: () {
                                           setState(() {
@@ -180,15 +168,11 @@ class _livroState extends State<livro> {
                                           });
                                         },
                                         child: Icon(
-                                          isBookmarked
-                                              ? Icons.bookmark
-                                              : Icons.bookmark_border,
+                                          isBookmarked ? Icons.bookmark : Icons.bookmark_border,
                                           size: 48,
                                           color: isBookmarked
                                               ? const Color(0xFF0B5F7D)
-                                              : const Color(
-                                                  0xFF5899B3,
-                                                ).withOpacity(0.4),
+                                              : const Color(0xFF5899B3).withOpacity(0.4),
                                         ),
                                       ),
                                     ],
@@ -198,22 +182,51 @@ class _livroState extends State<livro> {
 
                               const SizedBox(height: 24),
 
-                              // Stats Cards
+                              // Stats Cards — agora são botões
                               Row(
                                 children: [
                                   Expanded(
-                                    child: _buildStatsCard('Lesters', '12400'),
+                                    child: _buildStatsCard(
+                                      context,
+                                      'Lesters',
+                                      '12400',
+                                      const TelaLesters(),
+                                    ),
                                   ),
                                   const SizedBox(width: 16),
                                   Expanded(
-                                    child: _buildStatsCard('Screllers', '5412'),
+                                    child: _buildStatsCard(
+                                      context,
+                                      'Screllers',
+                                      '5412',
+                                      const TelaScrellers(),
+                                    ),
                                   ),
                                 ],
                               ),
 
                               const SizedBox(height: 20),
 
-                              // Action Buttons
+                              SizedBox(
+                                width: double.infinity,
+                                child: ElevatedButton(
+                                  onPressed: () {},
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color(0xFF0B5F7D),
+                                    foregroundColor: Colors.white,
+                                    padding: const EdgeInsets.symmetric(vertical: 16),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
+                                    elevation: 3,
+                                  ),
+                                  child: const Text(
+                                    'Ler sinopse',
+                                    style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic),
+                                  ),
+                                ),
+                              ),
+
                               const SizedBox(height: 12),
 
                               SizedBox(
@@ -223,9 +236,7 @@ class _livroState extends State<livro> {
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: const Color(0xFF0B5F7D),
                                     foregroundColor: Colors.white,
-                                    padding: const EdgeInsets.symmetric(
-                                      vertical: 16,
-                                    ),
+                                    padding: const EdgeInsets.symmetric(vertical: 16),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(30),
                                     ),
@@ -233,17 +244,13 @@ class _livroState extends State<livro> {
                                   ),
                                   child: const Text(
                                     'Escrever Resenha',
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontStyle: FontStyle.italic,
-                                    ),
+                                    style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic),
                                   ),
                                 ),
                               ),
 
                               const SizedBox(height: 24),
 
-                              // Review Card
                               Container(
                                 padding: const EdgeInsets.all(16),
                                 decoration: BoxDecoration(
@@ -253,7 +260,6 @@ class _livroState extends State<livro> {
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    // User Avatar
                                     Container(
                                       width: 50,
                                       height: 50,
@@ -272,11 +278,9 @@ class _livroState extends State<livro> {
                                       ),
                                     ),
                                     const SizedBox(width: 12),
-                                    // Review Content
                                     Expanded(
                                       child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           const Text(
                                             '@Eva Barreto',
@@ -310,15 +314,11 @@ class _livroState extends State<livro> {
                                             child: Row(
                                               children: [
                                                 Icon(
-                                                  isReviewLiked
-                                                      ? Icons.favorite
-                                                      : Icons.favorite_border,
+                                                  isReviewLiked ? Icons.favorite : Icons.favorite_border,
                                                   size: 20,
                                                   color: isReviewLiked
                                                       ? const Color(0xFF0B5F7D)
-                                                      : const Color(
-                                                          0xFF5899B3,
-                                                        ).withOpacity(0.4),
+                                                      : const Color(0xFF5899B3).withOpacity(0.4),
                                                 ),
                                                 const SizedBox(width: 6),
                                                 Text(
@@ -326,12 +326,8 @@ class _livroState extends State<livro> {
                                                   style: TextStyle(
                                                     fontSize: 14,
                                                     color: isReviewLiked
-                                                        ? const Color(
-                                                            0xFF0B5F7D,
-                                                          )
-                                                        : const Color(
-                                                            0xFF5899B3,
-                                                          ).withOpacity(0.6),
+                                                        ? const Color(0xFF0B5F7D)
+                                                        : const Color(0xFF5899B3).withOpacity(0.6),
                                                   ),
                                                 ),
                                               ],
@@ -374,36 +370,47 @@ class _livroState extends State<livro> {
     );
   }
 
-  Widget _buildStatsCard(String label, String value) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 20),
-      decoration: BoxDecoration(
-        color: const Color(0xFFC5D9E0),
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          Text(
-            label,
-            style: const TextStyle(fontSize: 18, color: Color(0xFF5899B3)),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            value,
-            style: const TextStyle(
-              fontSize: 24,
-              color: Color(0xFF5899B3),
-              fontWeight: FontWeight.w500,
+  Widget _buildStatsCard(BuildContext context, String label, String value, Widget destino) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => destino),
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        decoration: BoxDecoration(
+          color: const Color(0xFFA3CEE8),
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
             ),
-          ),
-        ],
+          ],
+        ),
+        child: Column(
+          children: [
+            Text(
+              label,
+              style: const TextStyle(
+                fontSize: 16,
+                color: Color(0xFF5B9AB8),
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              value,
+              style: const TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.w600,
+                color: Color(0xFF5B9AB8),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

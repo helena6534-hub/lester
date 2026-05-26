@@ -69,16 +69,6 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       );
     }
-
-    if (index == 3) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      const livro(),
-                ),
-              );
-            }
   }
 
   @override

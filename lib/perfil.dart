@@ -89,12 +89,6 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
         MaterialPageRoute(builder: (context) => const Perfil()),
       );
     }
-    if (index == 3) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const livro()),
-      );
-    }
   }
 
   void _toggleLike() {
@@ -404,12 +398,15 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 16),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5F3E7),
+        color: const Color(0xFFA3CEE8),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: bluePetrol.withOpacity(0.1),
-          width: 2,
-        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
       child: Column(
         children: [

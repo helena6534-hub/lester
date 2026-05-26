@@ -33,7 +33,6 @@ class _CadastroScreenState extends State<CadastroScreen> {
 
   static const Color beigeLight = Color(0xFFF5F3E7);
   static const Color blueLight = Color(0xFFA3CEE8);
-  static const Color blueMedium = Color(0xFF7F97B8);
   static const Color bluePetrol = Color(0xFF4A7C99);
 
   @override
