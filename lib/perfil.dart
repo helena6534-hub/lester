@@ -92,10 +92,31 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
     }
   }
 
+  // ── Navegação com filtro específico ─────────────────────────────
   void _navegarParaObras() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const Obrascard()),
+      MaterialPageRoute(
+        builder: (context) => const Obrascard(initialFilter: 'Obras'),
+      ),
+    );
+  }
+
+  void _navegarParaScrellers() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const Obrascard(initialFilter: 'Screllers'),
+      ),
+    );
+  }
+
+  void _navegarParaLesters() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const Obrascard(initialFilter: 'Lesters'),
+      ),
     );
   }
 
@@ -220,11 +241,12 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
 
               const SizedBox(height: 24),
 
-              // BOTÕES
+              // BOTÕES CARD — cada um navega para a aba correta
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
                   children: [
+                    // Obras
                     Expanded(
                       child: InkWell(
                         borderRadius: BorderRadius.circular(16),
@@ -237,14 +259,6 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
                           ),
                           child: const Column(
                             children: [
-                              Icon(
-                                Icons.menu_book_rounded,
-                                color: Color(0xFF5B8FA3),
-                                size: 26,
-                              ),
-
-                              SizedBox(height: 8),
-
                               Text(
                                 'Obras',
                                 style: TextStyle(
@@ -253,9 +267,7 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
-
                               SizedBox(height: 4),
-
                               Text(
                                 '32',
                                 style: TextStyle(
@@ -272,10 +284,11 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
 
                     const SizedBox(width: 12),
 
+                    // Screllers → abre na aba Screllers
                     Expanded(
                       child: InkWell(
                         borderRadius: BorderRadius.circular(16),
-                        onTap: () {},
+                        onTap: _navegarParaScrellers,
                         child: Container(
                           padding: const EdgeInsets.symmetric(vertical: 18),
                           decoration: BoxDecoration(
@@ -284,14 +297,6 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
                           ),
                           child: const Column(
                             children: [
-                              Icon(
-                                Icons.groups_rounded,
-                                color: Color(0xFF5B8FA3),
-                                size: 26,
-                              ),
-
-                              SizedBox(height: 8),
-
                               Text(
                                 'Screllers',
                                 style: TextStyle(
@@ -300,9 +305,7 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
-
                               SizedBox(height: 4),
-
                               Text(
                                 '1.2k',
                                 style: TextStyle(
@@ -319,10 +322,11 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
 
                     const SizedBox(width: 12),
 
+                    // Lesters → abre na aba Lesters
                     Expanded(
                       child: InkWell(
                         borderRadius: BorderRadius.circular(16),
-                        onTap: () {},
+                        onTap: _navegarParaLesters,
                         child: Container(
                           padding: const EdgeInsets.symmetric(vertical: 18),
                           decoration: BoxDecoration(
@@ -331,14 +335,6 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
                           ),
                           child: const Column(
                             children: [
-                              Icon(
-                                Icons.favorite_rounded,
-                                color: Color(0xFF5B8FA3),
-                                size: 26,
-                              ),
-
-                              SizedBox(height: 8),
-
                               Text(
                                 'Lesters',
                                 style: TextStyle(
@@ -347,9 +343,7 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
-
                               SizedBox(height: 4),
-
                               Text(
                                 '3.4k',
                                 style: TextStyle(

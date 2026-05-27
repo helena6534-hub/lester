@@ -30,7 +30,10 @@ class MyApp extends StatelessWidget {
 }
 
 class Obrascard extends StatefulWidget {
-  const Obrascard({super.key});
+  // ── Novo parâmetro para abrir direto na aba certa ──
+  final String initialFilter;
+
+  const Obrascard({super.key, this.initialFilter = 'Obras'});
 
   @override
   State<Obrascard> createState() => _ObrascardState();
@@ -38,9 +41,9 @@ class Obrascard extends StatefulWidget {
 
 class _ObrascardState extends State<Obrascard> {
   int _selectedIndex = 0;
-  String _activeFilter = 'Livros';
+  late String _activeFilter;
 
-  final List<String> _filters = ['Livros', 'Leitores', 'Autores'];
+  final List<String> _filters = ['Obras', 'Screllers', 'Lesters'];
 
   final List<Map<String, dynamic>> _mostSearchedBooks = [
     {
@@ -52,36 +55,40 @@ class _ObrascardState extends State<Obrascard> {
 
   final List<Map<String, dynamic>> _mostSearchedReaders = [
     {
-      'name': 'Ana Clara',
-      'lesters': '2300 Seguidores',
-      'color': const Color.fromARGB(255, 163, 91, 91),
-      'avatar': Icons.person,
+      'name': 'A Hora da Estrela',
+      'image': 'https://m.media-amazon.com/images/I/61TaHURu27L.jpg',
+      'likes': 2300,
     },
   ];
 
   final List<Map<String, dynamic>> _mostSearchedAuthors = [
     {
-      'name': 'Eva Barreto',
-      'lesters': '2300 Seguidores',
-      'color': const Color(0xFF5B8FA3),
-      'avatar': Icons.person,
+      'name': 'Capitães de Areia',
+      'image': 'https://m.media-amazon.com/images/I/81iVW0VvbUL._UF1000,1000_QL80_.jpg',
+      'likes': 2300,
     },
   ];
 
   @override
+  void initState() {
+    super.initState();
+    // Inicializa com o filtro recebido como parâmetro
+    _activeFilter = widget.initialFilter;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final List<Map<String, dynamic>> displayedItems = _activeFilter == 'Livros'
+    final List<Map<String, dynamic>> displayedItems = _activeFilter == 'Obras'
         ? _mostSearchedBooks
-        : _activeFilter == 'Leitores'
-        ? _mostSearchedReaders
-        : _mostSearchedAuthors;
+        : _activeFilter == 'Screllers'
+            ? _mostSearchedReaders
+            : _mostSearchedAuthors;
 
     return Scaffold(
-      // ── AppBar com botão de voltar no canto direito ──────────────
       appBar: AppBar(
         backgroundColor: const Color(0xFFF5F3E7),
         elevation: 0,
-        automaticallyImplyLeading: false, // remove seta padrão à esquerda
+        automaticallyImplyLeading: false,
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 8),
@@ -140,134 +147,67 @@ class _ObrascardState extends State<Obrascard> {
 
                     const SizedBox(height: 32),
 
-                    // ── Título ───────────────────────────────────
-                    const Text(
-                      'Mais buscados',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xFF5B8FA3),
-                      ),
-                    ),
-
-                    const SizedBox(height: 24),
-
-                    // ── Conteúdo por filtro ──────────────────────
-                    _activeFilter == 'Livros'
-                        ? GridView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount:
-                                      MediaQuery.of(context).size.width < 600
-                                      ? 1
-                                      : 6,
-                                  crossAxisSpacing: 8,
-                                  mainAxisSpacing: 8,
-                                  childAspectRatio: 0.55,
-                                ),
-                            itemCount: displayedItems.length,
-                            itemBuilder: (context, index) {
-                              final item = displayedItems[index];
-                              return Column(
-                                children: [
-                                  Expanded(
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(20),
-                                      child: Image.network(
-                                        item['image'],
-                                        fit: BoxFit.cover,
-                                        width: double.infinity,
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    item['name'],
-                                    style: const TextStyle(
-                                      color: Color(0xFF5B8FA3),
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 14,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  const SizedBox(height: 4),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      const Icon(
-                                        Icons.favorite,
-                                        color: Color(0xFF5B8FA3),
-                                        size: 20,
-                                      ),
-                                      const SizedBox(width: 4),
-                                      Text(
-                                        '${item['likes']}',
-                                        style: const TextStyle(
-                                          color: Color(0xFF5B8FA3),
-                                          fontSize: 14,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              );
-                            },
-                          )
-                        : Column(
-                            children: displayedItems.map((item) {
-                              return Container(
-                                margin: const EdgeInsets.only(bottom: 16),
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 12,
-                                  horizontal: 16,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFFF5F3E7),
-                                  borderRadius: BorderRadius.circular(12),
-                                  border: Border.all(
-                                    color: const Color(
-                                      0xFF4A7C99,
-                                    ).withOpacity(0.1),
-                                    width: 2,
-                                  ),
-                                ),
-                                child: Row(
-                                  children: [
-                                    CircleAvatar(
-                                      radius: 30,
-                                      backgroundColor: item['color'],
-                                      child: Icon(
-                                        item['avatar'],
-                                        size: 35,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    const SizedBox(width: 16),
-                                    Expanded(
-                                      child: Text(
-                                        item['name'],
-                                        style: const TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w500,
-                                          color: Color(0xFF5B9AB8),
-                                        ),
-                                      ),
-                                    ),
-                                    Text(
-                                      item['lesters'],
-                                      style: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                        color: Color(0xFF5B9AB8),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            }).toList(),
+                    // ── Grid ─────────────────────────────────────
+                    GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate:
+                          SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount:
+                                MediaQuery.of(context).size.width < 600 ? 3 : 6,
+                            crossAxisSpacing: 12,
+                            mainAxisSpacing: 12,
+                            childAspectRatio: 0.55,
                           ),
+                      itemCount: displayedItems.length,
+                      itemBuilder: (context, index) {
+                        final item = displayedItems[index];
+
+                        return Column(
+                          children: [
+                            Expanded(
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: Image.network(
+                                  item['image'],
+                                  fit: BoxFit.cover,
+                                  width: double.infinity,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              item['name'],
+                              style: const TextStyle(
+                                color: Color(0xFF5B8FA3),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: 4),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  Icons.favorite,
+                                  color: Color(0xFF5B8FA3),
+                                  size: 20,
+                                ),
+                                const SizedBox(width: 4),
+                                Text(
+                                  '${item['likes']}',
+                                  style: const TextStyle(
+                                    color: Color(0xFF5B8FA3),
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        );
+                      },
+                    ),
 
                     const SizedBox(height: 100),
                   ],

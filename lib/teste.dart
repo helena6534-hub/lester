@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'tela_lesters.dart';
-import 'tela_screllers.dart';
 
 void main() {
   runApp(const MyApp());

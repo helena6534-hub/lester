@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   static const Color bluePetrol = Color(0xFF4A7C99);
   static const Color beigeLight = Color(0xFFF5F3E7);
   static const Color blueLight = Color(0xFFA3CEE8);
-  
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -39,23 +39,17 @@ class Telapesquisa extends StatefulWidget {
 class _TelapesquisaState extends State<Telapesquisa> {
   int _selectedIndex = 0;
 
-  final TextEditingController _searchController =
-      TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
 
   String _activeFilter = 'Livros';
 
-  final List<String> _filters = [
-    'Livros',
-    'Leitores',
-    'Autores',
-  ];
+  final List<String> _filters = ['Livros', 'Leitores', 'Autores'];
 
   // LIVROS
   final List<Map<String, dynamic>> _mostSearchedBooks = [
     {
       'name': 'Crime e Castigo',
-      'image':
-          'https://m.media-amazon.com/images/I/916WkSH4cGL.jpg',
+      'image': 'https://m.media-amazon.com/images/I/916WkSH4cGL.jpg',
       'likes': 2785,
     },
   ];
@@ -106,35 +100,24 @@ class _TelapesquisaState extends State<Telapesquisa> {
               child: SingleChildScrollView(
                 padding: const EdgeInsets.all(16),
                 child: Column(
-                  crossAxisAlignment:
-                      CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // SEARCH BAR
                     Container(
                       decoration: BoxDecoration(
-                        color: const Color.fromARGB(
-                          255,
-                          205,
-                          218,
-                          226,
-                        ),
-                        borderRadius:
-                            BorderRadius.circular(30),
+                        color: const Color.fromARGB(255, 205, 218, 226),
+                        borderRadius: BorderRadius.circular(30),
                       ),
                       child: TextField(
                         controller: _searchController,
-                        decoration:
-                            const InputDecoration(
+                        decoration: const InputDecoration(
                           hintText: 'Busca',
                           hintStyle: TextStyle(
                             color: Color(0xFF7F97B8),
                             fontSize: 18,
                           ),
                           prefixIcon: Padding(
-                            padding: EdgeInsets.only(
-                              left: 24,
-                              right: 16,
-                            ),
+                            padding: EdgeInsets.only(left: 24, right: 16),
                             child: Icon(
                               Icons.search,
                               color: Color(0xFF7F97B8),
@@ -142,8 +125,7 @@ class _TelapesquisaState extends State<Telapesquisa> {
                             ),
                           ),
                           border: InputBorder.none,
-                          contentPadding:
-                              EdgeInsets.symmetric(
+                          contentPadding: EdgeInsets.symmetric(
                             horizontal: 24,
                             vertical: 16,
                           ),
@@ -159,53 +141,33 @@ class _TelapesquisaState extends State<Telapesquisa> {
 
                     // FILTROS
                     Row(
-                      children:
-                          _filters.map((filter) {
-                        final isActive =
-                            _activeFilter == filter;
+                      children: _filters.map((filter) {
+                        final isActive = _activeFilter == filter;
 
                         return Padding(
-                          padding:
-                              const EdgeInsets.only(
-                            right: 12,
-                          ),
+                          padding: const EdgeInsets.only(right: 12),
                           child: FilterChip(
                             label: Text(filter),
                             selected: isActive,
                             onSelected: (selected) {
                               setState(() {
-                                _activeFilter =
-                                    filter;
+                                _activeFilter = filter;
                               });
                             },
-                            backgroundColor:
-                                const Color(
-                              0xFFD4E6EE,
-                            ),
-                            selectedColor:
-                                const Color(
-                              0xFFA8C5D6,
-                            ),
+                            backgroundColor: const Color(0xFFD4E6EE),
+                            selectedColor: const Color(0xFFA8C5D6),
                             labelStyle: TextStyle(
                               color: isActive
                                   ? Colors.white
-                                  : const Color(
-                                      0xFF7F97B8,
-                                    ),
-                              fontWeight:
-                                  FontWeight.w500,
+                                  : const Color(0xFF7F97B8),
+                              fontWeight: FontWeight.w500,
                             ),
-                            padding:
-                                const EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                               horizontal: 16,
                               vertical: 8,
                             ),
-                            shape:
-                                RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(
-                                20,
-                              ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
                               side: BorderSide.none,
                             ),
                           ),
@@ -231,95 +193,60 @@ class _TelapesquisaState extends State<Telapesquisa> {
                     _activeFilter == 'Livros'
                         ? GridView.builder(
                             shrinkWrap: true,
-                            physics:
-                                const NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount:
-                                  MediaQuery.of(context)
-                                              .size
-                                              .width <
-                                          600
-                                      ? 1
-                                      : 6,
-                              crossAxisSpacing: 8,
-                              mainAxisSpacing: 8,
-                              childAspectRatio: 0.55,
-                            ),
-                            itemCount:
-                                displayedItems.length,
-                            itemBuilder:
-                                (context, index) {
-                              final item =
-                                  displayedItems[index];
+                                  crossAxisCount: MediaQuery.of(context).size.width < 600 ? 3:6,
+                                  crossAxisSpacing: 8,
+                                  mainAxisSpacing: 8,
+                                  childAspectRatio: 0.55,
+                                ),
+                            itemCount: displayedItems.length,
+                            itemBuilder: (context, index) {
+                              final item = displayedItems[index];
 
                               return Column(
                                 children: [
                                   Expanded(
                                     child: ClipRRect(
-                                      borderRadius:
-                                          BorderRadius.circular(
-                                        20,
-                                      ),
-                                      child:
-                                          Image.network(
+                                      borderRadius: BorderRadius.circular(20),
+                                      child: Image.network(
                                         item['image'],
-                                        fit:
-                                            BoxFit.cover,
-                                        width:
-                                            double.infinity,
+                                        fit: BoxFit.cover,
+                                        width: double.infinity,
                                       ),
                                     ),
                                   ),
 
-                                  const SizedBox(
-                                    height: 8,
-                                  ),
+                                  const SizedBox(height: 8),
 
                                   Text(
                                     item['name'],
-                                    style:
-                                        const TextStyle(
-                                      color: Color(
-                                        0xFF5B8FA3,
-                                      ),
-                                      fontWeight:
-                                          FontWeight
-                                              .bold,
+                                    style: const TextStyle(
+                                      color: Color(0xFF5B8FA3),
+                                      fontWeight: FontWeight.bold,
                                       fontSize: 14,
                                     ),
-                                    textAlign:
-                                        TextAlign.center,
+                                    textAlign: TextAlign.center,
                                   ),
 
-                                  const SizedBox(
-                                    height: 4,
-                                  ),
+                                  const SizedBox(height: 4),
 
                                   Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment
-                                            .center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       const Icon(
                                         Icons.favorite,
-                                        color: Color(
-                                          0xFF5B8FA3,
-                                        ),
+                                        color: Color(0xFF5B8FA3),
                                         size: 20,
                                       ),
 
-                                      const SizedBox(
-                                        width: 4,
-                                      ),
+                                      const SizedBox(width: 4),
 
                                       Text(
                                         '${item['likes']}',
-                                        style:
-                                            const TextStyle(
-                                          color: Color(
-                                            0xFF5B8FA3,
-                                          ),
+                                        style: const TextStyle(
+                                          color: Color(0xFF5B8FA3),
                                           fontSize: 14,
                                         ),
                                       ),
@@ -329,37 +256,22 @@ class _TelapesquisaState extends State<Telapesquisa> {
                               );
                             },
                           )
-
                         // LEITORES E AUTORES
                         : Column(
-                            children:
-                                displayedItems.map((item) {
+                            children: displayedItems.map((item) {
                               return Container(
-                                margin:
-                                    const EdgeInsets.only(
-                                  bottom: 16,
-                                ),
-                                padding:
-                                    const EdgeInsets.symmetric(
+                                margin: const EdgeInsets.only(bottom: 16),
+                                padding: const EdgeInsets.symmetric(
                                   vertical: 12,
                                   horizontal: 16,
                                 ),
-                                decoration:
-                                    BoxDecoration(
-                                  color: const Color(
-                                    0xFFF5F3E7,
-                                  ),
-                                  borderRadius:
-                                      BorderRadius.circular(
-                                    12,
-                                  ),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFFF5F3E7),
+                                  borderRadius: BorderRadius.circular(12),
                                   border: Border.all(
-                                    color:
-                                        const Color(
+                                    color: const Color(
                                       0xFF4A7C99,
-                                    ).withOpacity(
-                                      0.1,
-                                    ),
+                                    ).withOpacity(0.1),
                                     width: 2,
                                   ),
                                 ),
@@ -368,47 +280,33 @@ class _TelapesquisaState extends State<Telapesquisa> {
                                   children: [
                                     CircleAvatar(
                                       radius: 30,
-                                      backgroundColor:
-                                          item['color'],
+                                      backgroundColor: item['color'],
                                       child: Icon(
                                         item['avatar'],
                                         size: 35,
-                                        color:
-                                            Colors.white,
+                                        color: Colors.white,
                                       ),
                                     ),
 
-                                    const SizedBox(
-                                      width: 16,
-                                    ),
+                                    const SizedBox(width: 16),
 
                                     Expanded(
                                       child: Text(
                                         item['name'],
-                                        style:
-                                            const TextStyle(
+                                        style: const TextStyle(
                                           fontSize: 18,
-                                          fontWeight:
-                                              FontWeight
-                                                  .w500,
-                                          color: Color(
-                                            0xFF5B9AB8,
-                                          ),
+                                          fontWeight: FontWeight.w500,
+                                          color: Color(0xFF5B9AB8),
                                         ),
                                       ),
                                     ),
 
                                     Text(
                                       item['lesters'],
-                                      style:
-                                          const TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 16,
-                                        fontWeight:
-                                            FontWeight
-                                                .w600,
-                                        color: Color(
-                                          0xFF5B9AB8,
-                                        ),
+                                        fontWeight: FontWeight.w600,
+                                        color: Color(0xFF5B9AB8),
                                       ),
                                     ),
                                   ],
@@ -441,40 +339,29 @@ class _TelapesquisaState extends State<Telapesquisa> {
             if (index == 0) {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      const Telainicial(),
-                ),
+                MaterialPageRoute(builder: (context) => const Telainicial()),
               );
             }
 
             if (index == 1) {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      const Telapesquisa(),
-                ),
+                MaterialPageRoute(builder: (context) => const Telapesquisa()),
               );
             }
 
             if (index == 2) {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      const Perfil(),
-                ),
+                MaterialPageRoute(builder: (context) => const Perfil()),
               );
             }
           },
           type: BottomNavigationBarType.fixed,
           backgroundColor: Colors.transparent,
           elevation: 0,
-          selectedItemColor:
-              const Color(0xFF4A7A8F),
-          unselectedItemColor:
-              const Color(0xFF5B8FA3),
+          selectedItemColor: const Color(0xFF4A7A8F),
+          unselectedItemColor: const Color(0xFF5B8FA3),
           showSelectedLabels: false,
           showUnselectedLabels: false,
           items: const [
