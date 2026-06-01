@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lester/livro.dart';
 import 'package:lester/perfil.dart';
 import 'package:lester/telainicial.dart';
 
@@ -37,7 +36,7 @@ class Telapesquisa extends StatefulWidget {
 }
 
 class _TelapesquisaState extends State<Telapesquisa> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
 
   final TextEditingController _searchController = TextEditingController();
 
