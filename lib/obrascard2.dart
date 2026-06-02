@@ -23,10 +23,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: const Color(0xFFF5F3E7),
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.blue,
-          surface: const Color(0xFFF5F3E7),
-        ),
       ),
       home: const Obrascard(),
     );
@@ -36,7 +32,7 @@ class MyApp extends StatelessWidget {
 class Obrascard extends StatefulWidget {
   final String initialFilter;
 
-  const Obrascard({super.key, this.initialFilter = 'Obras'});
+  const Obrascard({super.key, this.initialFilter = 'Screllers'});
 
   @override
   State<Obrascard> createState() => _ObrascardState();
@@ -46,15 +42,7 @@ class _ObrascardState extends State<Obrascard> {
   int _selectedIndex = 0;
   late String _activeFilter;
 
-  final List<String> _filters = ['Obras', 'Screllers', 'Lesters'];
-
-  final List<Map<String, dynamic>> _mostSearchedBooks = [
-    {
-      'name': 'Crime e Castigo',
-      'image': 'https://m.media-amazon.com/images/I/916WkSH4cGL.jpg',
-      'likes': 2785,
-    },
-  ];
+  final List<String> _filters = ['Screllers', 'Lesters'];
 
   final List<Map<String, dynamic>> _mostSearchedReaders = [
     {
@@ -80,16 +68,13 @@ class _ObrascardState extends State<Obrascard> {
 
   @override
   Widget build(BuildContext context) {
-    final List<Map<String, dynamic>> displayedItems = _activeFilter == 'Obras'
-        ? _mostSearchedBooks
-        : _activeFilter == 'Screllers'
-            ? _mostSearchedReaders
-            : _mostSearchedAuthors;
+    final List<Map<String, dynamic>> displayedItems = _activeFilter == 'Screllers'
+        ? _mostSearchedReaders
+        : _mostSearchedAuthors;
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFFF5F3E7),
-        surfaceTintColor: Colors.transparent,
         elevation: 0,
         automaticallyImplyLeading: false,
         actions: [

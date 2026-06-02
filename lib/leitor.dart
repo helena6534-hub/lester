@@ -92,16 +92,6 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
     }
   }
 
-  // ── Navegação com filtro específico ─────────────────────────────
-  void _navegarParaObras() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const Obrascard(initialFilter: 'Obras'),
-      ),
-    );
-  }
-
   void _navegarParaScrellers() {
     Navigator.push(
       context,
@@ -178,7 +168,7 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
-                            'Eva Barreto',
+                            'Ana Clara',
                             style: TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.w500,
@@ -189,7 +179,7 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
                           const SizedBox(height: 4),
 
                           const Text(
-                            'Escritor',
+                            'Leitor',
                             style: TextStyle(fontSize: 20, color: textBlue),
                           ),
 
@@ -209,7 +199,7 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
                               ),
                             ),
                             child: const Text(
-                              '4587 Seguidores',
+                              '356 Seguidores',
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
@@ -246,44 +236,7 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
                   children: [
-                    // Obras
-                    Expanded(
-                      child: InkWell(
-                        borderRadius: BorderRadius.circular(16),
-                        onTap: _navegarParaObras,
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(vertical: 18),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFA3CEE8),
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          child: const Column(
-                            children: [
-                              Text(
-                                'Obras',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  color: Color(0xFF5B8FA3),
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              SizedBox(height: 4),
-                              Text(
-                                '32',
-                                style: TextStyle(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xFF5B8FA3),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-
                     const SizedBox(width: 12),
-
                     // Screllers → abre na aba Screllers
                     Expanded(
                       child: InkWell(
@@ -307,7 +260,7 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
                               ),
                               SizedBox(height: 4),
                               Text(
-                                '1.2k',
+                                '388',
                                 style: TextStyle(
                                   fontSize: 22,
                                   fontWeight: FontWeight.bold,
@@ -345,7 +298,7 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
                               ),
                               SizedBox(height: 4),
                               Text(
-                                '3.4k',
+                                '127',
                                 style: TextStyle(
                                   fontSize: 22,
                                   fontWeight: FontWeight.bold,
@@ -430,7 +383,7 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  '@Eva Barreto',
+                  '@Ana Clara',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
@@ -441,7 +394,7 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
                 const SizedBox(height: 4),
 
                 const Text(
-                  'Livro lindo! Superou o meu...',
+                  'Nossa, amei!',
                   style: TextStyle(fontSize: 16, color: Color(0xFF5B9AB8)),
                 ),
 
@@ -468,7 +421,7 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
                       Text(
                         '$_likes Curtidas',
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 14,
                           fontWeight: FontWeight.w600,
                           color: _liked ? bluePetrol : const Color(0xFF5B9AB8),
                         ),
