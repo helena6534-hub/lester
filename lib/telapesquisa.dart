@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lester/leitor.dart';
+import 'package:lester/livro.dart';
 import 'package:lester/perfil.dart';
 import 'package:lester/telainicial.dart';
 
@@ -92,6 +94,7 @@ class _TelapesquisaState extends State<Telapesquisa> {
     }
 
     return Scaffold(
+      backgroundColor: const Color(0xFFF5F3E7), // ← ADICIONADO
       body: SafeArea(
         child: Column(
           children: [
@@ -195,7 +198,7 @@ class _TelapesquisaState extends State<Telapesquisa> {
                             physics: const NeverScrollableScrollPhysics(),
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: MediaQuery.of(context).size.width < 600 ? 3:6,
+                                  crossAxisCount: MediaQuery.of(context).size.width < 600 ? 3 : 6,
                                   crossAxisSpacing: 8,
                                   mainAxisSpacing: 8,
                                   childAspectRatio: 0.55,
@@ -204,116 +207,137 @@ class _TelapesquisaState extends State<Telapesquisa> {
                             itemBuilder: (context, index) {
                               final item = displayedItems[index];
 
-                              return Column(
-                                children: [
-                                  Expanded(
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(20),
-                                      child: Image.network(
-                                        item['image'],
-                                        fit: BoxFit.cover,
-                                        width: double.infinity,
-                                      ),
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const Livro(),
                                     ),
-                                  ),
-
-                                  const SizedBox(height: 8),
-
-                                  Text(
-                                    item['name'],
-                                    style: const TextStyle(
-                                      color: Color(0xFF5B8FA3),
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 14,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-
-                                  const SizedBox(height: 4),
-
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      const Icon(
-                                        Icons.favorite,
-                                        color: Color(0xFF5B8FA3),
-                                        size: 20,
-                                      ),
-
-                                      const SizedBox(width: 4),
-
-                                      Text(
-                                        '${item['likes']}',
-                                        style: const TextStyle(
-                                          color: Color(0xFF5B8FA3),
-                                          fontSize: 14,
+                                  );
+                                },
+                                child: Column(
+                                  children: [
+                                    Expanded(
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(20),
+                                        child: Image.network(
+                                          item['image'],
+                                          fit: BoxFit.cover,
+                                          width: double.infinity,
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                ],
+                                    ),
+
+                                    const SizedBox(height: 8),
+
+                                    Text(
+                                      item['name'],
+                                      style: const TextStyle(
+                                        color: Color(0xFF5B8FA3),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+
+                                    const SizedBox(height: 4),
+
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        const Icon(
+                                          Icons.favorite,
+                                          color: Color(0xFF5B8FA3),
+                                          size: 20,
+                                        ),
+
+                                        const SizedBox(width: 4),
+
+                                        Text(
+                                          '${item['likes']}',
+                                          style: const TextStyle(
+                                            color: Color(0xFF5B8FA3),
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               );
                             },
                           )
                         // LEITORES E AUTORES
                         : Column(
                             children: displayedItems.map((item) {
-                              return Container(
-                                margin: const EdgeInsets.only(bottom: 16),
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 12,
-                                  horizontal: 16,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFFF5F3E7),
-                                  borderRadius: BorderRadius.circular(12),
-                                  border: Border.all(
-                                    color: const Color(
-                                      0xFF4A7C99,
-                                    ).withOpacity(0.1),
-                                    width: 2,
-                                  ),
-                                ),
-
-                                child: Row(
-                                  children: [
-                                    CircleAvatar(
-                                      radius: 30,
-                                      backgroundColor: item['color'],
-                                      child: Icon(
-                                        item['avatar'],
-                                        size: 35,
-                                        color: Colors.white,
+                              return GestureDetector(
+                                onTap: () {
+                                  if (_activeFilter == 'Leitores') {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => const Leitor(),
                                       ),
+                                    );
+                                  }
+                                },
+                                child: Container(
+                                  margin: const EdgeInsets.only(bottom: 16),
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 12,
+                                    horizontal: 16,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFFF5F3E7),
+                                    borderRadius: BorderRadius.circular(12),
+                                    border: Border.all(
+                                      color: const Color(
+                                        0xFF4A7C99,
+                                      ).withOpacity(0.1),
+                                      width: 2,
                                     ),
+                                  ),
 
-                                    const SizedBox(width: 16),
+                                  child: Row(
+                                    children: [
+                                      CircleAvatar(
+                                        radius: 30,
+                                        backgroundColor: item['color'],
+                                        child: Icon(
+                                          item['avatar'],
+                                          size: 35,
+                                          color: Colors.white,
+                                        ),
+                                      ),
 
-                                    Expanded(
-                                      child: Text(
-                                        item['name'],
+                                      const SizedBox(width: 16),
+
+                                      Expanded(
+                                        child: Text(
+                                          item['name'],
+                                          style: const TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w500,
+                                            color: Color(0xFF5B9AB8),
+                                          ),
+                                        ),
+                                      ),
+
+                                      Text(
+                                        item['lesters'],
                                         style: const TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w500,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
                                           color: Color(0xFF5B9AB8),
                                         ),
                                       ),
-                                    ),
-
-                                    Text(
-                                      item['lesters'],
-                                      style: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                        color: Color(0xFF5B9AB8),
-                                      ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               );
                             }).toList(),
                           ),
-
                     const SizedBox(height: 100),
                   ],
                 ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lester/obrascard.dart';
-import 'package:lester/telainicial.dart';
-import 'package:lester/telapesquisa.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -16,22 +15,21 @@ class MyApp extends StatelessWidget {
       title: 'User Profile',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: const Perfil(),
+      home: const Leitor(),
     );
   }
 }
 
-class Perfil extends StatefulWidget {
+class Leitor extends StatefulWidget {
   final int initialLikes;
 
-  const Perfil({super.key, this.initialLikes = 104});
+  const Leitor({super.key, this.initialLikes = 104});
 
   @override
-  State<Perfil> createState() => _PerfilState();
+  State<Leitor> createState() => _LeitorState();
 }
 
-class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
-  int _selectedIndex = 2;
+class _LeitorState extends State<Leitor> with SingleTickerProviderStateMixin {
 
   late int _likes;
 
@@ -65,31 +63,6 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
   void dispose() {
     _controller.dispose();
     super.dispose();
-  }
-
-  void _onItemTapped(int index) {
-    setState(() => _selectedIndex = index);
-
-    if (index == 0) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const Telainicial()),
-      );
-    }
-
-    if (index == 1) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const Telapesquisa()),
-      );
-    }
-
-    if (index == 2) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const Perfil()),
-      );
-    }
   }
 
   void _navegarParaScrellers() {
@@ -127,6 +100,20 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color(0xFFF5F3E7),
+        surfaceTintColor: Colors.transparent,
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          onPressed: () => Navigator.maybePop(context),
+          icon: const Icon(
+            Icons.arrow_back,
+            size: 28,
+            color: Color(0xFF4A7C99),
+          ),
+        ),
+      ),
       backgroundColor: const Color(0xFFF5F3E7),
 
       body: SafeArea(
@@ -354,8 +341,6 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
           ),
         ),
       ),
-
-      bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 
@@ -432,35 +417,6 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
               ],
             ),
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildBottomNavigationBar() {
-    return Container(
-      decoration: const BoxDecoration(
-        color: Color(0xFFC5DAE8),
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(24),
-          topRight: Radius.circular(24),
-        ),
-      ),
-      child: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        selectedItemColor: const Color(0xFF4A7A8F),
-        unselectedItemColor: const Color(0xFF5B8FA3),
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Busca'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Perfil'),
-          BottomNavigationBarItem(icon: Icon(Icons.grid_3x3), label: 'Grid'),
         ],
       ),
     );

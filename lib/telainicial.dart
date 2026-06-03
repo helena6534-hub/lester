@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lester/livro.dart'; // ← IMPORT ADICIONADO
 import 'package:lester/perfil.dart';
 import 'package:lester/telapesquisa.dart';
 
@@ -117,7 +118,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  children: [_buildBookCard("imagens/crime.jpg")],
+                  children: [
+                    _buildBookCard("imagens/crime.jpg"), // ← navegação adicionada dentro
+                  ],
                 ),
               ),
 
@@ -153,22 +156,30 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildBookCard(String imagePath) {
-    return Container(
-      width: 170,
-      margin: const EdgeInsets.only(right: 16),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: Image.asset(
-          imagePath,
-          fit: BoxFit.cover,
-          errorBuilder: (context, error, stackTrace) {
-            return Container(
-              color: Colors.grey[300],
-              child: const Center(
-                child: Icon(Icons.book, size: 50, color: Colors.grey),
-              ),
-            );
-          },
+    return GestureDetector( // ← ADICIONADO
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const Livro()),
+        );
+      },
+      child: Container(
+        width: 170,
+        margin: const EdgeInsets.only(right: 16),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Image.asset(
+            imagePath,
+            fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) {
+              return Container(
+                color: Colors.grey[300],
+                child: const Center(
+                  child: Icon(Icons.book, size: 50, color: Colors.grey),
+                ),
+              );
+            },
+          ),
         ),
       ),
     );
