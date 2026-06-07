@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lester/Editardados.dart';
 import 'package:lester/perfil.dart';
+import 'package:lester/publique.dart';
 import 'package:lester/telainicial.dart';
 import 'package:lester/telapesquisa.dart';
 
@@ -47,32 +49,31 @@ class _FuncoesState extends State<Funcoes> {
             childAspectRatio: 1.3,
             children: [
               _buildMenuCard(
-                icon: Icons.assignment_turned_in_outlined,
-                label: 'Planos',
+                icon: Icons.person,
+                label: 'Editar Dados',
                 onTap: () {
-                  // Navegar para tela de Planos
-                },
-              ),
-              _buildMenuCard(
-                icon: Icons.menu,
-                label: 'Configurações',
-                onTap: () {
-                  // Navegar para tela de Configurações
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Editardados(),
+                    ),
+                  );
                 },
               ),
               _buildMenuCard(
                 icon: Icons.edit,
                 label: 'Publique',
                 onTap: () {
-                  // Navegar para tela de Publicação
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Publique()),
+                  );
                 },
               ),
               _buildMenuCard(
-                icon: Icons.mic_none,
+                icon: Icons.psychology,
                 label: 'Dicas com IA',
-                onTap: () {
-                  // Navegar para tela de Dicas com IA
-                },
+                onTap: () {},
               ),
             ],
           ),
@@ -95,18 +96,22 @@ class _FuncoesState extends State<Funcoes> {
                 MaterialPageRoute(builder: (context) => const Telainicial()),
               );
             }
-
             if (index == 1) {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const Telapesquisa()),
               );
             }
-
             if (index == 2) {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const Perfil()),
+              );
+            }
+            if (index == 3) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Funcoes()),
               );
             }
           },
@@ -151,15 +156,15 @@ class _FuncoesState extends State<Funcoes> {
         decoration: BoxDecoration(
           color: const Color(0xFFD4E6F1),
           borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: const Color(0xFF4A7C99).withOpacity(0.4),
+            width: 2,
+          ),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              icon,
-              size: 80,
-              color: const Color(0xFF5B8DB8),
-            ),
+            Icon(icon, size: 80, color: const Color(0xFF5B8DB8)),
             const SizedBox(height: 16),
             Text(
               label,
