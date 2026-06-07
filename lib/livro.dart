@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lester/resenha.dart'; // nome do arquivo da tela de resenha
 
 void main() {
   runApp(const MyApp());
@@ -34,8 +35,6 @@ class _LivroState extends State<Livro> {
   static const Color bluePetrol = Color(0xFF4A7C99);
   static const Color textBlue = Color(0xFF5B8FA3);
   static const Color bgBeige = Color(0xFFF5F3E7);
-  static const Color blueLight = Color(0xFFA3CEE8);
-  static const Color navBar = Color(0xFFC5DAE8);
 
   @override
   Widget build(BuildContext context) {
@@ -199,7 +198,15 @@ class _LivroState extends State<Livro> {
                           SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const Resenha(),
+                                  ),
+                                );
+                              },
+
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: bluePetrol,
                                 foregroundColor: Colors.white,
@@ -363,10 +370,7 @@ class _LivroState extends State<Livro> {
         color: const Color(0xFFA3CEE8),
         borderRadius: BorderRadius.circular(20),
       ),
-      child: Text(
-        label,
-        style: const TextStyle(fontSize: 14, color: textBlue),
-      ),
+      child: Text(label, style: const TextStyle(fontSize: 14, color: textBlue)),
     );
   }
 
@@ -388,7 +392,11 @@ class _LivroState extends State<Livro> {
         children: [
           Text(
             label,
-            style: const TextStyle(fontSize: 15, color: textBlue, fontWeight: FontWeight.w500),
+            style: const TextStyle(
+              fontSize: 15,
+              color: textBlue,
+              fontWeight: FontWeight.w500,
+            ),
           ),
           const SizedBox(height: 4),
           Text(
