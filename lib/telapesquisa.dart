@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lester/funcoes.dart';
 import 'package:lester/leitor.dart';
 import 'package:lester/livro.dart';
 import 'package:lester/perfil.dart';
@@ -68,7 +69,7 @@ class _TelapesquisaState extends State<Telapesquisa> {
   // AUTORES
   final List<Map<String, dynamic>> _mostSearchedAuthors = [
     {
-      'name': 'Eva Barreto',
+      'name': 'Pedro Lucas',
       'lesters': '2300 Seguidores',
       'color': const Color(0xFF5B8FA3),
       'avatar': Icons.person,
@@ -198,7 +199,10 @@ class _TelapesquisaState extends State<Telapesquisa> {
                             physics: const NeverScrollableScrollPhysics(),
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: MediaQuery.of(context).size.width < 600 ? 3 : 6,
+                                  crossAxisCount:
+                                      MediaQuery.of(context).size.width < 600
+                                      ? 3
+                                      : 6,
                                   crossAxisSpacing: 8,
                                   mainAxisSpacing: 8,
                                   childAspectRatio: 0.55,
@@ -244,7 +248,8 @@ class _TelapesquisaState extends State<Telapesquisa> {
                                     const SizedBox(height: 4),
 
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         const Icon(
                                           Icons.favorite,
@@ -292,9 +297,7 @@ class _TelapesquisaState extends State<Telapesquisa> {
                                     color: const Color(0xFFF5F3E7),
                                     borderRadius: BorderRadius.circular(12),
                                     border: Border.all(
-                                      color: const Color(
-                                        0xFF4A7C99,
-                                      ).withOpacity(0.1),
+                                      color: Color(0xFFA3CEE8),
                                       width: 2,
                                     ),
                                   ),
@@ -377,6 +380,13 @@ class _TelapesquisaState extends State<Telapesquisa> {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const Perfil()),
+              );
+            }
+
+            if (index == 3) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Funcoes()),
               );
             }
           },
