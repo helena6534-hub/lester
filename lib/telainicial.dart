@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lester/livro.dart'; // ← IMPORT ADICIONADO
+import 'package:lester/funcoes.dart';
+import 'package:lester/livro.dart';
 import 'package:lester/perfil.dart';
 import 'package:lester/telapesquisa.dart';
 
@@ -61,6 +62,13 @@ class _HomeScreenState extends State<HomeScreen> {
         MaterialPageRoute(builder: (context) => const Perfil()),
       );
     }
+
+    if (index == 3) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const Funcoes()),
+      );
+    }
   }
 
   @override
@@ -72,30 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Stack(
-                children: [
-                  SizedBox(
-                    height: 300,
-                    width: double.infinity,
-                    child: Image.asset(
-                      "imagens/habito.png",
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) {
-                        return Container(
-                          color: Colors.grey[300],
-                          child: const Center(
-                            child: Icon(
-                              Icons.image,
-                              size: 50,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
+              const _BannerCarousel(),
 
               const SizedBox(height: 24),
 
@@ -118,9 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  children: [
-                    _buildBookCard("imagens/crime.jpg"), // ← navegação adicionada dentro
-                  ],
+                  children: [_buildBookCard("imagens/crime.jpg")],
                 ),
               ),
 
@@ -139,9 +122,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
 
               const SizedBox(height: 30),
-
-              _buildPodium(),
-
               const SizedBox(height: 40),
 
               _buildRankingList(),
@@ -156,7 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildBookCard(String imagePath) {
-    return GestureDetector( // ← ADICIONADO
+    return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
@@ -185,46 +165,10 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildPodium() {
-    return Column(
-      children: [
-        const Icon(Icons.star, color: Color(0xFF4A7C99), size: 125),
-
-        const SizedBox(height: 20),
-
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            _buildPodiumBar(120, const Color(0xFF4A7C99)),
-            const SizedBox(width: 8),
-            _buildPodiumBar(180, const Color(0xFF4A7C99)),
-            const SizedBox(width: 8),
-            _buildPodiumBar(150, const Color(0xFF4A7C99)),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildPodiumBar(double height, Color color) {
-    return Container(
-      width: 80,
-      height: height,
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(8),
-          topRight: Radius.circular(8),
-        ),
-      ),
-    );
-  }
-
   Widget _buildRankingList() {
     final List<Map<String, dynamic>> users = [
       {
-        'name': 'Eva Barreto',
+        'name': 'Larissa Souza',
         'lesters': '1290 Screllers',
         'color': const Color(0xFFE89A7D),
         'avatar': Icons.person,
@@ -236,9 +180,9 @@ class _HomeScreenState extends State<HomeScreen> {
         'avatar': Icons.person,
       },
       {
-        'name': 'Pedro Lucas',
+        'name': 'Bruna Cavalhero',
         'lesters': '928 Screllers',
-        'color': const Color(0xFF6AA5C0),
+        'color': const Color.fromARGB(255, 235, 255, 137),
         'avatar': Icons.person,
       },
     ];
@@ -258,10 +202,7 @@ class _HomeScreenState extends State<HomeScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFF5F3E7),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: const Color(0xFF4A7C99).withOpacity(0.1),
-          width: 2,
-        ),
+        border: Border.all(color: Color(0xFFA3CEE8), width: 2),
       ),
       child: Row(
         children: [
@@ -270,9 +211,7 @@ class _HomeScreenState extends State<HomeScreen> {
             backgroundColor: user['color'],
             child: Icon(user['avatar'], size: 35, color: Colors.white),
           ),
-
           const SizedBox(width: 16),
-
           Expanded(
             child: Text(
               user['name'],
@@ -283,7 +222,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-
           Text(
             user['lesters'],
             style: const TextStyle(
@@ -337,4 +275,147 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+}
+
+// ════════════════════════════════════════════════════════════════
+//  BANNER CARROSSEL
+// ════════════════════════════════════════════════════════════════
+
+class _BannerCarousel extends StatefulWidget {
+  const _BannerCarousel();
+
+  @override
+  State<_BannerCarousel> createState() => _BannerCarouselState();
+}
+
+class _BannerCarouselState extends State<_BannerCarousel> {
+  final PageController _controller = PageController();
+  int _current = 0;
+
+  static const _items = [
+    _CarouselItem(
+      icon: Icons.menu_book_rounded,
+      title: 'Seja um Escritor\n ou um Leitor',
+      subtitle: 'Escolha seu papel e mergulhe no universo literário',
+    ),
+    _CarouselItem(
+      icon: Icons.auto_awesome,
+      title: 'Aprimore suas ideias\n com Inteligência Artificial',
+      subtitle: 'Nossa IA te ajuda a dar vida à sua história',
+    ),
+    _CarouselItem(
+      icon: Icons.public,
+      title: 'Publique de forma\nindependente e gratuita',
+      subtitle: 'Compartilhe sua obra com leitores do mundo todo',
+    ),
+  ];
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(
+          height: 200,
+          child: NotificationListener<ScrollNotification>(
+            onNotification: (_) => true,
+            child: PageView.builder(
+              controller: _controller,
+              physics: const PageScrollPhysics(),
+              itemCount: _items.length,
+              onPageChanged: (i) => setState(() => _current = i),
+              itemBuilder: (context, i) {
+                final item = _items[i];
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Color(0xFFA3CEE8),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 28,
+                      vertical: 24,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(item.icon, size: 36, color: Color(0xFF4A7C99)),
+                        const SizedBox(height: 14),
+                        Text(
+                          item.title,
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            color: Color(0xFF4A7C99),
+                            height: 1.25,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          item.subtitle,
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Color(0xFF4A7C99).withOpacity(0.65),
+                            height: 1.4,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
+        const SizedBox(height: 12),
+        // Indicadores clicáveis
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: List.generate(_items.length, (i) {
+            final active = i == _current;
+            return GestureDetector(
+              onTap: () {
+                _controller.animateToPage(
+                  i,
+                  duration: const Duration(milliseconds: 350),
+                  curve: Curves.easeInOut,
+                );
+              },
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 250),
+                margin: const EdgeInsets.symmetric(horizontal: 4),
+                width: active ? 20 : 7,
+                height: 7,
+                decoration: BoxDecoration(
+                  color: active
+                      ? const Color(0xFF4A7C99)
+                      : const Color(0xFF4A7C99).withOpacity(0.30),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+              ),
+            );
+          }),
+        ),
+      ],
+    );
+  }
+}
+
+class _CarouselItem {
+  final IconData icon;
+  final String title;
+  final String subtitle;
+  const _CarouselItem({
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+  });
 }
