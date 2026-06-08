@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lester/obrascard.dart';
+import 'package:lester/obrascard2.dart';
 
 
 void main() {
@@ -69,7 +69,7 @@ class _LeitorState extends State<Leitor> with SingleTickerProviderStateMixin {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const Obrascard(initialFilter: 'Screllers'),
+        builder: (context) => const Obrascard2(initialFilter: 'Screllers'),
       ),
     );
   }
@@ -78,7 +78,7 @@ class _LeitorState extends State<Leitor> with SingleTickerProviderStateMixin {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const Obrascard(initialFilter: 'Lesters'),
+        builder: (context) => const Obrascard2(initialFilter: 'Lesters'),
       ),
     );
   }

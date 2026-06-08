@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lester/funcoes.dart';
 import 'package:lester/obrascard.dart';
 import 'package:lester/telainicial.dart';
 import 'package:lester/telapesquisa.dart';
@@ -30,7 +31,7 @@ class Perfil extends StatefulWidget {
   State<Perfil> createState() => _PerfilState();
 }
 
-class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
+class _PerfilState extends State<Perfil> {
   int _selectedIndex = 2;
 
   late int _likes;
@@ -38,61 +39,15 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
   bool _liked = false;
   bool _seguindo = false;
 
-  late AnimationController _controller;
-  late Animation<double> _scaleAnim;
-
   static const Color bluePetrol = Color(0xFF4A7C99);
   static const Color textBlue = Color(0xFF5B8FA3);
 
   @override
   void initState() {
     super.initState();
-
     _likes = widget.initialLikes;
-
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 150),
-    );
-
-    _scaleAnim = Tween<double>(
-      begin: 1.0,
-      end: 1.3,
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
   }
 
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  void _onItemTapped(int index) {
-    setState(() => _selectedIndex = index);
-
-    if (index == 0) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const Telainicial()),
-      );
-    }
-
-    if (index == 1) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const Telapesquisa()),
-      );
-    }
-
-    if (index == 2) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const Perfil()),
-      );
-    }
-  }
-
-  // ── Navegação com filtro específico ─────────────────────────────
   void _navegarParaObras() {
     Navigator.push(
       context,
@@ -130,15 +85,12 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
         _liked = true;
       }
     });
-
-    _controller.forward().then((_) => _controller.reverse());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F3E7),
-
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -146,7 +98,6 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
             children: [
               const SizedBox(height: 16),
 
-              // Avatar
               Center(
                 child: Container(
                   width: 130,
@@ -167,7 +118,6 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
 
               const SizedBox(height: 24),
 
-              // Nome
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
@@ -241,12 +191,10 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
 
               const SizedBox(height: 24),
 
-              // BOTÕES CARD — cada um navega para a aba correta
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
                   children: [
-                    // Obras
                     Expanded(
                       child: InkWell(
                         borderRadius: BorderRadius.circular(16),
@@ -284,7 +232,6 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
 
                     const SizedBox(width: 12),
 
-                    // Screllers → abre na aba Screllers
                     Expanded(
                       child: InkWell(
                         borderRadius: BorderRadius.circular(16),
@@ -307,7 +254,7 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
                               ),
                               SizedBox(height: 4),
                               Text(
-                                '1.2k',
+                                '123',
                                 style: TextStyle(
                                   fontSize: 22,
                                   fontWeight: FontWeight.bold,
@@ -322,7 +269,6 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
 
                     const SizedBox(width: 12),
 
-                    // Lesters → abre na aba Lesters
                     Expanded(
                       child: InkWell(
                         borderRadius: BorderRadius.circular(16),
@@ -345,7 +291,7 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
                               ),
                               SizedBox(height: 4),
                               Text(
-                                '3.4k',
+                                '372',
                                 style: TextStyle(
                                   fontSize: 22,
                                   fontWeight: FontWeight.bold,
@@ -363,7 +309,6 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
 
               const SizedBox(height: 24),
 
-              // Resenhas
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Align(
@@ -401,7 +346,6 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
           ),
         ),
       ),
-
       bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
@@ -417,10 +361,10 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CircleAvatar(
+          const CircleAvatar(
             radius: 30,
-            backgroundColor: const Color(0xFFE89A7D),
-            child: const Icon(Icons.person, size: 35, color: Colors.white),
+            backgroundColor: Color(0xFFE89A7D),
+            child: Icon(Icons.person, size: 35, color: Colors.white),
           ),
 
           const SizedBox(width: 16),
@@ -452,15 +396,10 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      ScaleTransition(
-                        scale: _scaleAnim,
-                        child: Icon(
-                          _liked ? Icons.favorite : Icons.favorite_border,
-                          color: _liked
-                              ? bluePetrol
-                              : bluePetrol.withOpacity(0.4),
-                          size: 20,
-                        ),
+                      Icon(
+                        _liked ? Icons.favorite : Icons.favorite_border,
+                        color: _liked ? bluePetrol : bluePetrol.withOpacity(0.4),
+                        size: 20,
                       ),
 
                       const SizedBox(width: 6),
@@ -495,7 +434,32 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
       ),
       child: BottomNavigationBar(
         currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
+        onTap: (index) {
+          if (index == 0) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Telainicial()),
+            );
+          }
+          if (index == 1) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Telapesquisa()),
+            );
+          }
+          if (index == 2) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Perfil()),
+            );
+          }
+          if (index == 3) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Funcoes()),
+            );
+          }
+        },
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -504,10 +468,22 @@ class _PerfilState extends State<Perfil> with SingleTickerProviderStateMixin {
         showSelectedLabels: false,
         showUnselectedLabels: false,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Busca'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Perfil'),
-          BottomNavigationBarItem(icon: Icon(Icons.grid_3x3), label: 'Grid'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home, size: 28),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search, size: 28),
+            label: 'Busca',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person, size: 28),
+            label: 'Perfil',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.grid_3x3, size: 28),
+            label: 'Grid',
+          ),
         ],
       ),
     );
@@ -548,7 +524,5 @@ class AvatarPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return false;
-  }
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

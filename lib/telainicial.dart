@@ -37,40 +37,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-
-    if (index == 0) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const Telainicial()),
-      );
-    }
-
-    if (index == 1) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => Telapesquisa()),
-      );
-    }
-
-    if (index == 2) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const Perfil()),
-      );
-    }
-
-    if (index == 3) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const Funcoes()),
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               const _BannerCarousel(),
 
-              const SizedBox(height: 24),
+              const SizedBox(height: 10),
 
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
@@ -121,8 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
 
-              const SizedBox(height: 30),
-              const SizedBox(height: 40),
+              const SizedBox(height: 16),
 
               _buildRankingList(),
 
@@ -131,7 +96,72 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: _buildBottomNavigationBar(),
+      bottomNavigationBar: Container(
+        decoration: const BoxDecoration(
+          color: Color(0xFFC5DAE8),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(24),
+            topRight: Radius.circular(24),
+          ),
+        ),
+        child: BottomNavigationBar(
+          currentIndex: _selectedIndex,
+          onTap: (index) {
+            if (index == 0) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Telainicial()),
+              );
+            }
+
+            if (index == 1) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Telapesquisa()),
+              );
+            }
+
+            if (index == 2) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Perfil()),
+              );
+            }
+
+            if (index == 3) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Funcoes()),
+              );
+            }
+          },
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          selectedItemColor: const Color(0xFF4A7A8F),
+          unselectedItemColor: const Color(0xFF5B8FA3),
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home, size: 28),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.search, size: 28),
+              label: 'Busca',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person, size: 28),
+              label: 'Perfil',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.grid_3x3, size: 28),
+              label: 'Grid',
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -229,47 +259,6 @@ class _HomeScreenState extends State<HomeScreen> {
               fontWeight: FontWeight.w600,
               color: Color(0xFF5B9AB8),
             ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildBottomNavigationBar() {
-    return Container(
-      decoration: const BoxDecoration(
-        color: Color(0xFFC5DAE8),
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(24),
-          topRight: Radius.circular(24),
-        ),
-      ),
-      child: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        selectedItemColor: const Color(0xFF4A7A8F),
-        unselectedItemColor: const Color(0xFF5B8FA3),
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home, size: 28),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search, size: 28),
-            label: 'Busca',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person, size: 28),
-            label: 'Perfil',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.grid_3x3, size: 28),
-            label: 'Grid',
           ),
         ],
       ),
@@ -376,7 +365,6 @@ class _BannerCarouselState extends State<_BannerCarousel> {
           ),
         ),
         const SizedBox(height: 12),
-        // Indicadores clicáveis
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: List.generate(_items.length, (i) {

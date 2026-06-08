@@ -21,22 +21,21 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: const Color(0xFFF5F3E7),
       ),
-      home: const Obrascard(),
+      home: const Obrascard2(),
     );
   }
 }
 
-class Obrascard extends StatefulWidget {
+class Obrascard2 extends StatefulWidget {
   final String initialFilter;
 
-  const Obrascard({super.key, this.initialFilter = 'Screllers'});
+  const Obrascard2({super.key, this.initialFilter = 'Screllers'});
 
   @override
-  State<Obrascard> createState() => _ObrascardState();
+  State<Obrascard2> createState() => _Obrascard2State();
 }
 
-class _ObrascardState extends State<Obrascard> {
-  int _selectedIndex = 0;
+class _Obrascard2State extends State<Obrascard2> {
   late String _activeFilter;
 
   final List<String> _filters = ['Screllers', 'Lesters'];
@@ -70,6 +69,7 @@ class _ObrascardState extends State<Obrascard> {
         : _mostSearchedAuthors;
 
     return Scaffold(
+      backgroundColor: const Color(0xFFF5F3E7), // <- forçado aqui
       appBar: AppBar(
         backgroundColor: const Color(0xFFF5F3E7),
         surfaceTintColor: Colors.transparent,

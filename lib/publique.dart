@@ -252,7 +252,6 @@ class _PubliqueState extends State<Publique> {
                                   .trim()
                                   .split(RegExp(r'\s+'))
                                   .length;
-
                         return GestureDetector(
                           onTap: () async {
                             final resultado =
