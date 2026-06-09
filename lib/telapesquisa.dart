@@ -95,7 +95,7 @@ class _TelapesquisaState extends State<Telapesquisa> {
     }
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F3E7), // ← ADICIONADO
+      backgroundColor: const Color(0xFFF5F3E7), 
       body: SafeArea(
         child: Column(
           children: [

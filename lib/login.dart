@@ -114,96 +114,10 @@ class _loginState extends State<login> {
     );
   }
 
-  void _handleForgotPassword() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        final controller = TextEditingController();
-        return AlertDialog(
-          backgroundColor: beigeLight,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-          title: const Text(
-            'Recuperar senha',
-            style: TextStyle(color: bluePetrol, fontWeight: FontWeight.w600),
-          ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Digite seu email para verificarmos o cadastro.',
-                style: TextStyle(color: blueMedium, fontSize: 14),
-              ),
-              const SizedBox(height: 16),
-              TextFormField(
-                controller: controller,
-                keyboardType: TextInputType.emailAddress,
-                // Bloqueia maiúsculas na parte do nome do usuário em tempo real
-                inputFormatters: [_LowercaseBeforeAtFormatter()],
-                decoration: InputDecoration(
-                  hintText: 'seu@email.com',
-                  filled: true,
-                  fillColor: Colors.white,
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 16, vertical: 12,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: const BorderSide(color: blueLight, width: 2),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: const BorderSide(color: blueLight, width: 2),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: const BorderSide(color: bluePetrol, width: 2),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('Cancelar', style: TextStyle(color: blueMedium)),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    backgroundColor: bluePetrol,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    behavior: SnackBarBehavior.floating,
-                    content: const Text(
-                      'Se este email estiver cadastrado, você receberá as instruções em breve.',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: bluePetrol,
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-              child: const Text('Verificar'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   void _handleSignUp() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => CadastroScreen()),
+      MaterialPageRoute(builder: (context) => Cadastro()),
     );
   }
 
@@ -313,14 +227,14 @@ class _loginState extends State<login> {
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
-                onPressed: _handleForgotPassword,
+                onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const Telainicial()),),
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.zero,
                   minimumSize: const Size(0, 0),
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
                 child: const Text(
-                  'Esqueceu a senha?',
+                  'Quero entrar sem cadastro',
                   style: TextStyle(fontSize: 14, color: blueMedium),
                 ),
               ),

@@ -83,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.w500,
-                    color: Color(0xFF5B94B8),
+                    color: Color(0xFF5B8FA3),
                   ),
                 ),
               ),
@@ -99,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
-          color: Color(0xFFC5DAE8),
+          color: Color(0xFF4A7C99),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(24),
             topRight: Radius.circular(24),
@@ -139,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
           type: BottomNavigationBarType.fixed,
           backgroundColor: Colors.transparent,
           elevation: 0,
-          selectedItemColor: const Color(0xFF4A7A8F),
+          selectedItemColor: const Color.fromARGB(255, 44, 78, 92),
           unselectedItemColor: const Color(0xFF5B8FA3),
           showSelectedLabels: false,
           showUnselectedLabels: false,
@@ -267,9 +267,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-// ════════════════════════════════════════════════════════════════
+
 //  BANNER CARROSSEL
-// ════════════════════════════════════════════════════════════════
 
 class _BannerCarousel extends StatefulWidget {
   const _BannerCarousel();
