@@ -139,8 +139,8 @@ class _HomeScreenState extends State<HomeScreen> {
           type: BottomNavigationBarType.fixed,
           backgroundColor: Colors.transparent,
           elevation: 0,
-          selectedItemColor: const Color.fromARGB(255, 44, 78, 92),
-          unselectedItemColor: const Color(0xFF5B8FA3),
+          selectedItemColor: const Color.fromARGB(255, 106, 155, 185),
+          unselectedItemColor: const Color(0xFFA3CEE8),
           showSelectedLabels: false,
           showUnselectedLabels: false,
           items: const [

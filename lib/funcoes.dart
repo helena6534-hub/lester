@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lester/Editardados.dart';
+import 'package:lester/chatia.dart';
 import 'package:lester/perfil.dart';
 import 'package:lester/publique.dart';
 import 'package:lester/telainicial.dart';
@@ -39,6 +40,7 @@ class _FuncoesState extends State<Funcoes> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFF5F3E7),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(10),
@@ -73,15 +75,21 @@ class _FuncoesState extends State<Funcoes> {
               _buildMenuCard(
                 icon: Icons.psychology,
                 label: 'Dicas com IA',
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Chat()),
+                  );
+                },
               ),
             ],
           ),
         ),
       ),
+
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
-          color: Color(0xFFC5DAE8),
+          color: Color(0xFF4A7C99),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(24),
             topRight: Radius.circular(24),
@@ -96,18 +104,21 @@ class _FuncoesState extends State<Funcoes> {
                 MaterialPageRoute(builder: (context) => const Telainicial()),
               );
             }
+
             if (index == 1) {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const Telapesquisa()),
               );
             }
+
             if (index == 2) {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const Perfil()),
               );
             }
+
             if (index == 3) {
               Navigator.push(
                 context,
@@ -118,8 +129,8 @@ class _FuncoesState extends State<Funcoes> {
           type: BottomNavigationBarType.fixed,
           backgroundColor: Colors.transparent,
           elevation: 0,
-          selectedItemColor: const Color(0xFF4A7A8F),
-          unselectedItemColor: const Color(0xFF5B8FA3),
+          selectedItemColor: const Color.fromARGB(255, 106, 155, 185),
+          unselectedItemColor: const Color(0xFFA3CEE8),
           showSelectedLabels: false,
           showUnselectedLabels: false,
           items: const [
