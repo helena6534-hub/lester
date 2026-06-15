@@ -399,10 +399,6 @@ class _CadastroState extends State<Cadastro> {
 
   Widget _buildDicaSenha() {
     final senha = _senhaCtrl.text;
-    final temLetra    = _temLetra.hasMatch(senha);
-    final temNumero   = _temNumero.hasMatch(senha);
-    final temEspecial = _temEspecial.hasMatch(senha);
-    final temTamanho  = senha.length >= 6;
 
     return ValueListenableBuilder(
       valueListenable: _senhaCtrl,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lester/perfil.dart';
 import 'package:lester/escritorleitor.dart';
-
+import 'package:lester/login.dart';
 
 class Editardados extends StatefulWidget {
   const Editardados({super.key});
@@ -34,7 +34,10 @@ class _EditardadosState extends State<Editardados> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 8,
+                vertical: 16,
+              ),
               child: Row(
                 children: [
                   IconButton(
@@ -73,20 +76,29 @@ class _EditardadosState extends State<Editardados> {
                       decoration: BoxDecoration(
                         color: bgBeige,
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: blueLight, width: 1.5),
+                        border: Border.all(
+                          color: blueLight,
+                          width: 1.5,
+                        ),
                       ),
                       child: TextField(
                         controller: _usuarioController,
                         decoration: const InputDecoration(
                           labelText: 'Usuário',
-                          labelStyle: TextStyle(color: textBlue, fontSize: 16),
+                          labelStyle: TextStyle(
+                            color: textBlue,
+                            fontSize: 16,
+                          ),
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.symmetric(
                             horizontal: 16,
                             vertical: 16,
                           ),
                         ),
-                        style: const TextStyle(fontSize: 16, color: textBlue),
+                        style: const TextStyle(
+                          fontSize: 16,
+                          color: textBlue,
+                        ),
                       ),
                     ),
 
@@ -96,21 +108,30 @@ class _EditardadosState extends State<Editardados> {
                       decoration: BoxDecoration(
                         color: bgBeige,
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: blueLight, width: 1.5),
+                        border: Border.all(
+                          color: blueLight,
+                          width: 1.5,
+                        ),
                       ),
                       child: TextField(
                         controller: _gmailController,
                         keyboardType: TextInputType.emailAddress,
                         decoration: const InputDecoration(
                           labelText: 'Alterar Gmail',
-                          labelStyle: TextStyle(color: textBlue, fontSize: 16),
+                          labelStyle: TextStyle(
+                            color: textBlue,
+                            fontSize: 16,
+                          ),
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.symmetric(
                             horizontal: 16,
                             vertical: 16,
                           ),
                         ),
-                        style: const TextStyle(fontSize: 16, color: textBlue),
+                        style: const TextStyle(
+                          fontSize: 16,
+                          color: textBlue,
+                        ),
                       ),
                     ),
 
@@ -172,7 +193,8 @@ class _EditardadosState extends State<Editardados> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const Escritorleitor(),
+                                  builder: (context) =>
+                                      const Escritorleitor(),
                                 ),
                               );
                             },
@@ -207,34 +229,85 @@ class _EditardadosState extends State<Editardados> {
             ),
 
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
-              child: SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Perfil()),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: bluePetrol,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 18),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(40),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 24,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(
+                    width: double.infinity,
+                    child: OutlinedButton(
+                      onPressed: () {
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const login(),
+                          ),
+                          (route) => false,
+                        );
+                      },
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(
+                          color: bluePetrol,
+                          width: 2,
+                        ),
+                        backgroundColor: bgBeige,
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 18,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(40),
+                        ),
+                      ),
+                      child: const Text(
+                        'Sair da Conta',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontStyle: FontStyle.italic,
+                          fontWeight: FontWeight.w500,
+                          color: bluePetrol,
+                        ),
+                      ),
                     ),
-                    elevation: 0,
                   ),
-                  child: const Text(
-                    'Concluir',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.w500,
+
+                  const SizedBox(height: 12),
+
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Perfil(),
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: bluePetrol,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 18,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(40),
+                        ),
+                        elevation: 0,
+                      ),
+                      child: const Text(
+                        'Concluir',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontStyle: FontStyle.italic,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                ],
               ),
             ),
           ],
