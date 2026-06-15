@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lester/Editardados.dart';
+import 'package:lester/editardados.dart';
 import 'package:lester/chatia.dart';
 import 'package:lester/perfil.dart';
 import 'package:lester/publique.dart';

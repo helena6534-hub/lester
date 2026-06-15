@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lester/Editardados.dart';
 import 'package:lester/perfil.dart';
 
 void main() {
@@ -22,6 +23,8 @@ class MyApp extends StatelessWidget {
   }
 }
 
+enum TipoUsuario { leitor, escritor }
+
 class Escritorleitor extends StatefulWidget {
   const Escritorleitor({super.key});
 
@@ -35,14 +38,59 @@ class _EscritorleitorState extends State<Escritorleitor> {
   static const Color bgBeige = Color(0xFFF5F3E7);
   static const Color blueLight = Color(0xFFA3CEE8);
 
-  final TextEditingController _usuarioController = TextEditingController();
-  final TextEditingController _gmailController = TextEditingController();
+  TipoUsuario? _selecionado;
 
-  @override
-  void dispose() {
-    _usuarioController.dispose();
-    _gmailController.dispose();
-    super.dispose();
+  Widget _buildOpcao({
+    required String titulo,
+    required IconData icone,
+    required TipoUsuario tipo,
+  }) {
+    final bool selecionado = _selecionado == tipo;
+
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _selecionado = tipo;
+        });
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: selecionado ? blueLight.withOpacity(0.3) : bgBeige,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: selecionado ? bluePetrol : blueLight,
+            width: selecionado ? 2.5 : 1.5,
+          ),
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+        child: Row(
+          children: [
+            Icon(
+              icone,
+              size: 28,
+              color: selecionado ? bluePetrol : textBlue,
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Text(
+                titulo,
+                style: TextStyle(
+                  fontSize: 16,
+                  color: selecionado ? bluePetrol : textBlue,
+                  fontWeight: selecionado ? FontWeight.w600 : FontWeight.normal,
+                ),
+              ),
+            ),
+            Icon(
+              selecionado
+                  ? Icons.radio_button_checked
+                  : Icons.radio_button_unchecked,
+              color: selecionado ? bluePetrol : blueLight,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   @override
@@ -89,51 +137,20 @@ class _EscritorleitorState extends State<Escritorleitor> {
                   children: [
                     const SizedBox(height: 8),
 
-                    // CAMPO USUÁRIO
-                    Container(
-                      decoration: BoxDecoration(
-                        color: bgBeige,
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: blueLight, width: 1.5),
-                      ),
-                      child: TextField(
-                        controller: _usuarioController,
-                        decoration: const InputDecoration(
-                          labelText: 'Usuário',
-                          labelStyle: TextStyle(color: textBlue, fontSize: 16),
-                          border: InputBorder.none,
-                          contentPadding: EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 16,
-                          ),
-                        ),
-                        style: const TextStyle(fontSize: 16, color: textBlue),
-                      ),
+                    // OPÇÃO LEITOR
+                    _buildOpcao(
+                      titulo: 'Leitor',
+                      icone: Icons.menu_book_outlined,
+                      tipo: TipoUsuario.leitor,
                     ),
 
                     const SizedBox(height: 16),
 
-                    // CAMPO GMAIL
-                    Container(
-                      decoration: BoxDecoration(
-                        color: bgBeige,
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: blueLight, width: 1.5),
-                      ),
-                      child: TextField(
-                        controller: _gmailController,
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: const InputDecoration(
-                          labelText: 'Senha',
-                          labelStyle: TextStyle(color: textBlue, fontSize: 16),
-                          border: InputBorder.none,
-                          contentPadding: EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 16,
-                          ),
-                        ),
-                        style: const TextStyle(fontSize: 16, color: textBlue),
-                      ),
+                    // OPÇÃO ESCRITOR
+                    _buildOpcao(
+                      titulo: 'Escritor',
+                      icone: Icons.edit_outlined,
+                      tipo: TipoUsuario.escritor,
                     ),
                   ],
                 ),
@@ -146,14 +163,19 @@ class _EscritorleitorState extends State<Escritorleitor> {
               child: SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Perfil()),
-                    );
-                  },
+                  onPressed: _selecionado == null
+                      ? null
+                      : () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const Editardados(),
+                            ),
+                          );
+                        },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: bluePetrol,
+                    disabledBackgroundColor: bluePetrol.withOpacity(0.4),
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 18),
                     shape: RoundedRectangleBorder(
