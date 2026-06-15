@@ -2,23 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:lester/obrascard2.dart';
 
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'User Profile',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: const Leitor(),
-    );
-  }
-}
 
 class Leitor extends StatefulWidget {
   final int initialLikes;
@@ -123,7 +106,6 @@ class _LeitorState extends State<Leitor> with SingleTickerProviderStateMixin {
             children: [
               const SizedBox(height: 16),
 
-              // Avatar
               Center(
                 child: Container(
                   width: 130,
@@ -144,7 +126,6 @@ class _LeitorState extends State<Leitor> with SingleTickerProviderStateMixin {
 
               const SizedBox(height: 24),
 
-              // Nome
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
@@ -218,13 +199,11 @@ class _LeitorState extends State<Leitor> with SingleTickerProviderStateMixin {
 
               const SizedBox(height: 24),
 
-              // BOTÕES CARD — cada um navega para a aba correta
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
                   children: [
                     const SizedBox(width: 12),
-                    // Screllers → abre na aba Screllers
                     Expanded(
                       child: InkWell(
                         borderRadius: BorderRadius.circular(16),
@@ -262,7 +241,6 @@ class _LeitorState extends State<Leitor> with SingleTickerProviderStateMixin {
 
                     const SizedBox(width: 12),
 
-                    // Lesters → abre na aba Lesters
                     Expanded(
                       child: InkWell(
                         borderRadius: BorderRadius.circular(16),
@@ -303,7 +281,6 @@ class _LeitorState extends State<Leitor> with SingleTickerProviderStateMixin {
 
               const SizedBox(height: 24),
 
-              // Resenhas
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Align(
@@ -423,7 +400,6 @@ class _LeitorState extends State<Leitor> with SingleTickerProviderStateMixin {
   }
 }
 
-// ── Avatar ───────────────────────────────────────────────
 class AvatarPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {

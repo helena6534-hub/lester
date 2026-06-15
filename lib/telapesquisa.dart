@@ -5,9 +5,6 @@ import 'package:lester/livro.dart';
 import 'package:lester/perfil.dart';
 import 'package:lester/telainicial.dart';
 
-void main() {
-  runApp(const MyApp());
-}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -105,7 +102,7 @@ class _TelapesquisaState extends State<Telapesquisa> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // SEARCH BAR
+                    
                     Container(
                       decoration: BoxDecoration(
                         color: const Color.fromARGB(255, 205, 218, 226),

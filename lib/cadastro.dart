@@ -1,23 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-// ─── Ponto de entrada para preview isolado ────────────────────────────────────
-void main() => runApp(const _PreviewApp());
 
-class _PreviewApp extends StatelessWidget {
-  const _PreviewApp();
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Lêster Cadastro',
-      theme: ThemeData(primaryColor: const Color(0xFF4A7C99)),
-      home: const Cadastro(),
-    );
-  }
-}
-
-// ─── Modelo simples de usuário (sem banco de dados) ───────────────────────────
 class _UserModel {
   final String email;
   final String username;
@@ -32,7 +16,7 @@ class _UserModel {
   });
 }
 
-// ─── Simulação de repositório em memória ─────────────────────────────────────
+
 class _FakeUserRepository {
   static final _FakeUserRepository _instance = _FakeUserRepository._();
   _FakeUserRepository._();
@@ -40,7 +24,7 @@ class _FakeUserRepository {
 
   final List<_UserModel> _users = [];
 
-  /// Retorna null se o cadastro foi bem-sucedido, ou uma mensagem de erro.
+
   String? cadastrar(_UserModel user) {
     final emailJaUsado = _users.any(
       (u) => u.email.toLowerCase() == user.email.toLowerCase(),
@@ -57,7 +41,7 @@ class _FakeUserRepository {
   }
 }
 
-// ─── Tela de Cadastro ─────────────────────────────────────────────────────────
+
 class Cadastro extends StatefulWidget {
   const Cadastro({super.key});
 
@@ -66,13 +50,11 @@ class Cadastro extends StatefulWidget {
 }
 
 class _CadastroState extends State<Cadastro> {
-  // ── Paleta (idêntica ao login) ──────────────────────────────────────────────
   static const Color beigeLight  = Color(0xFFF5F3E7);
   static const Color blueLight   = Color(0xFFA3CEE8);
   static const Color blueMedium  = Color(0xFF7F97B8);
   static const Color bluePetrol  = Color(0xFF4A7C99);
 
-  // ── Estado do formulário ───────────────────────────────────────────────────
   final _formKey    = GlobalKey<FormState>();
   final _emailCtrl  = TextEditingController();
   final _nomeCtrl   = TextEditingController();
@@ -84,7 +66,6 @@ class _CadastroState extends State<Cadastro> {
   bool _confirmVisivel      = false;
   bool _carregando          = false;
 
-  // ── Regex (mesma política do login) ────────────────────────────────────────
   static final RegExp _emailRegex = RegExp(
     r'^[a-z0-9][a-z0-9\.\-\_]*@[a-z0-9][a-z0-9\.\-]*\.[a-z]{2,}$',
   );
@@ -101,7 +82,6 @@ class _CadastroState extends State<Cadastro> {
     super.dispose();
   }
 
-  // ── Validações ──────────────────────────────────────────────────────────────
   String? _validarEmail(String? value) {
     if (value == null || value.isEmpty) return 'Por favor, insira seu e-mail';
     final partes = value.trim().split('@');
@@ -140,7 +120,6 @@ class _CadastroState extends State<Cadastro> {
     return null;
   }
 
-  // ── Ação de cadastro ────────────────────────────────────────────────────────
   void _handleCadastro() async {
     if (!_formKey.currentState!.validate()) return;
 
@@ -214,7 +193,6 @@ class _CadastroState extends State<Cadastro> {
     );
   }
 
-  // ── Construção da UI ────────────────────────────────────────────────────────
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -284,7 +262,6 @@ class _CadastroState extends State<Cadastro> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // ── Título ───────────────────────────────────────────────────────
             const Row(
               children: [
                 Icon(Icons.person_add_outlined, color: bluePetrol, size: 20),
@@ -301,11 +278,9 @@ class _CadastroState extends State<Cadastro> {
             ),
             const SizedBox(height: 24),
 
-            // ── Toggle Leitor / Escritor ──────────────────────────────────────
             _buildToggle(),
             const SizedBox(height: 20),
 
-            // ── Email ─────────────────────────────────────────────────────────
             _buildLabel('E-mail'),
             const SizedBox(height: 8),
             TextFormField(
@@ -317,7 +292,6 @@ class _CadastroState extends State<Cadastro> {
             ),
             const SizedBox(height: 20),
 
-            // ── Nome de usuário ───────────────────────────────────────────────
             _buildLabel('Nome de usuário'),
             const SizedBox(height: 8),
             TextFormField(
@@ -328,7 +302,6 @@ class _CadastroState extends State<Cadastro> {
             ),
             const SizedBox(height: 20),
 
-            // ── Senha ─────────────────────────────────────────────────────────
             _buildLabel('Senha'),
             const SizedBox(height: 8),
             _buildSenhaField(
@@ -342,7 +315,6 @@ class _CadastroState extends State<Cadastro> {
             _buildDicaSenha(),
             const SizedBox(height: 20),
 
-            // ── Confirmar senha ───────────────────────────────────────────────
             _buildLabel('Confirmar senha'),
             const SizedBox(height: 8),
             _buildSenhaField(
@@ -354,7 +326,6 @@ class _CadastroState extends State<Cadastro> {
             ),
             const SizedBox(height: 32),
 
-            // ── Botão Cadastrar ───────────────────────────────────────────────
             ElevatedButton(
               onPressed: _carregando ? null : _handleCadastro,
               style: ElevatedButton.styleFrom(
@@ -386,7 +357,6 @@ class _CadastroState extends State<Cadastro> {
     );
   }
 
-  // ── Toggle Leitor / Escritor ───────────────────────────────────────────────
   Widget _buildToggle() {
     return Row(
       children: [
@@ -427,7 +397,6 @@ class _CadastroState extends State<Cadastro> {
     );
   }
 
-  // ── Dica de força de senha ─────────────────────────────────────────────────
   Widget _buildDicaSenha() {
     final senha = _senhaCtrl.text;
     final temLetra    = _temLetra.hasMatch(senha);
@@ -475,7 +444,6 @@ class _CadastroState extends State<Cadastro> {
     );
   }
 
-  // ── Campo de senha com toggle ──────────────────────────────────────────────
   Widget _buildSenhaField({
     required TextEditingController controller,
     required String hint,
@@ -487,7 +455,7 @@ class _CadastroState extends State<Cadastro> {
       controller: controller,
       obscureText: !visivel,
       validator: validator,
-      onChanged: (_) => setState(() {}), // atualiza dicas em tempo real
+      onChanged: (_) => setState(() {}), 
       decoration: _inputDecoration(
         hint,
         suffixIcon: IconButton(
@@ -502,7 +470,6 @@ class _CadastroState extends State<Cadastro> {
     );
   }
 
-  // ── Rodapé ─────────────────────────────────────────────────────────────────
   Widget _buildFooter() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -534,7 +501,6 @@ class _CadastroState extends State<Cadastro> {
     );
   }
 
-  // ── Helpers de decoração ───────────────────────────────────────────────────
   Widget _buildLabel(String text) {
     return Text(
       text,
@@ -577,7 +543,6 @@ class _CadastroState extends State<Cadastro> {
   }
 }
 
-// ─── Formatter: minúsculas antes do @ (igual ao login) ────────────────────────
 class _LowercaseBeforeAtFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(

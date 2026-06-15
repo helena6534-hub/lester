@@ -1,25 +1,6 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Resenha',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: const Color(0xFFF5F3E7),
-      ),
-      home: const Resenha(),
-    );
-  }
-}
 
 class Resenha extends StatefulWidget {
   const Resenha({super.key});
@@ -47,7 +28,7 @@ class _ResenhaState extends State<Resenha> {
       body: SafeArea(
         child: Column(
           children: [
-            // HEADER
+            
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
               child: Row(
@@ -84,7 +65,7 @@ class _ResenhaState extends State<Resenha> {
                   children: [
                     const SizedBox(height: 8),
 
-                    // CAMPO DE IMPRESSÕES
+                    
                     Container(
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -119,7 +100,7 @@ class _ResenhaState extends State<Resenha> {
               ),
             ),
 
-            // BOTÃO PUBLICAR
+            
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
               child: SizedBox(

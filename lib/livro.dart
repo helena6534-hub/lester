@@ -1,23 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lester/resenha.dart'; // nome do arquivo da tela de resenha
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Book Details',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: const Livro(),
-    );
-  }
-}
 
 class Livro extends StatefulWidget {
   const Livro({super.key});
@@ -43,7 +26,6 @@ class _LivroState extends State<Livro> {
       body: SafeArea(
         child: Column(
           children: [
-            // Header with back button
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Row(
@@ -64,7 +46,6 @@ class _LivroState extends State<Livro> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    // Book Cover
                     Center(
                       child: Container(
                         width: 180,
@@ -93,13 +74,11 @@ class _LivroState extends State<Livro> {
 
                     const SizedBox(height: 30),
 
-                    // Content Section
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Title, Author and Icons Row
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -124,7 +103,6 @@ class _LivroState extends State<Livro> {
                                       ),
                                     ),
                                     const SizedBox(height: 16),
-                                    // Tags
                                     Row(
                                       children: [
                                         _buildTag('Suspense'),
@@ -136,7 +114,6 @@ class _LivroState extends State<Livro> {
                                 ),
                               ),
                               const SizedBox(width: 16),
-                              // Action Icons
                               Column(
                                 children: [
                                   InkWell(
@@ -179,7 +156,7 @@ class _LivroState extends State<Livro> {
 
                           const SizedBox(height: 24),
 
-                          // Stats Cards
+                          
                           Row(
                             children: [
                               Expanded(
@@ -194,7 +171,7 @@ class _LivroState extends State<Livro> {
 
                           const SizedBox(height: 20),
 
-                          // Escrever Resenha Button
+                          
                           SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
@@ -230,7 +207,7 @@ class _LivroState extends State<Livro> {
 
                           const SizedBox(height: 24),
 
-                          // Resenhas label — igual ao Perfil
+                          
                           Align(
                             alignment: Alignment.centerLeft,
                             child: Container(
@@ -255,7 +232,7 @@ class _LivroState extends State<Livro> {
 
                           const SizedBox(height: 20),
 
-                          // Review Card — igual ao _buildResenhaCard do Perfil
+                          
                           Container(
                             padding: const EdgeInsets.symmetric(
                               vertical: 12,

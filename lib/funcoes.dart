@@ -6,26 +6,6 @@ import 'package:lester/publique.dart';
 import 'package:lester/telainicial.dart';
 import 'package:lester/telapesquisa.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Menu Principal',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: Color(0xFFF5F3E7),
-      ),
-      home: const Funcoes(),
-    );
-  }
-}
 
 class Funcoes extends StatefulWidget {
   const Funcoes({super.key});

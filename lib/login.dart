@@ -3,18 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:lester/cadastro.dart';
 import 'package:lester/telainicial.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "Login",
-      theme: ThemeData(primaryColor: Colors.blue),
-      home: const login(),
-    );
-  }
-}
 
 class login extends StatefulWidget {
   const login({super.key});
@@ -36,8 +24,6 @@ class _loginState extends State<login> {
   static const Color blueMedium = Color(0xFF7F97B8);
   static const Color bluePetrol = Color(0xFF4A7C99);
 
-  // Regex de email — valida estrutura completa: nome@dominio.extensao
-  // O nome (parte antes do @) não pode ter letras maiúsculas
   static final RegExp _emailRegex = RegExp(
     r'^[a-z0-9][a-z0-9\.\-\_]*@[a-z0-9][a-z0-9\.\-]*\.[a-z]{2,}$',
   );
@@ -60,19 +46,19 @@ class _loginState extends State<login> {
 
     final partes = value.trim().split('@');
 
-    // Verifica se há exatamente uma parte antes e uma depois do @
+   
     if (partes.length != 2) {
       return 'Insira um email válido (ex: nome@dominio.com)';
     }
 
     final nomeUsuario = partes[0];
 
-    // Bloqueia maiúsculas especificamente no nome do usuário
+    
     if (nomeUsuario != nomeUsuario.toLowerCase()) {
       return 'O nome do usuário não pode conter letras maiúsculas';
     }
 
-    // Valida a estrutura completa do email
+    
     if (!_emailRegex.hasMatch(value.trim())) {
       return 'Insira um email válido (ex: nome@dominio.com)';
     }
@@ -211,8 +197,7 @@ class _loginState extends State<login> {
             TextFormField(
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
-              // Converte automaticamente maiúsculas para minúsculas
-              // apenas na parte antes do @ enquanto o usuário digita
+              
               inputFormatters: [_LowercaseBeforeAtFormatter()],
               validator: _validarEmail,
               decoration: _inputDecoration('seu@email.com'),
@@ -361,9 +346,7 @@ class _loginState extends State<login> {
   }
 }
 
-/// InputFormatter que converte automaticamente letras maiúsculas
-/// para minúsculas apenas na parte do nome do usuário (antes do @).
-/// Após o @, o texto é preservado como digitado.
+
 class _LowercaseBeforeAtFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
@@ -373,7 +356,7 @@ class _LowercaseBeforeAtFormatter extends TextInputFormatter {
     final text = newValue.text;
     final atIndex = text.indexOf('@');
 
-    // Se ainda não digitou o @, converte tudo para minúsculo
+   
     if (atIndex == -1) {
       final lower = text.toLowerCase();
       return newValue.copyWith(
@@ -382,7 +365,7 @@ class _LowercaseBeforeAtFormatter extends TextInputFormatter {
       );
     }
 
-    // Converte só a parte antes do @ e mantém o restante intacto
+   
     final nomeLower = text.substring(0, atIndex).toLowerCase();
     final resto = text.substring(atIndex);
     final resultado = nomeLower + resto;

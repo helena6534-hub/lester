@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lester/livro.dart'; // ← IMPORT ADICIONADO
 
-void main() {
-  runApp(const MyApp());
-}
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -68,6 +66,9 @@ class _ObrascardState extends State<Obrascard> {
       'likes': 2300,
     },
   ];
+
+
+  
 
   @override
   void initState() {
@@ -157,7 +158,7 @@ class _ObrascardState extends State<Obrascard> {
                       itemBuilder: (context, index) {
                         final item = displayedItems[index];
 
-                        return GestureDetector( // ← ADICIONADO
+                        return GestureDetector(
                           onTap: () {
                             if (_activeFilter == 'Obras') {
                               Navigator.push(

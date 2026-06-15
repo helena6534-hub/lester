@@ -4,23 +4,7 @@ import 'package:lester/obrascard.dart';
 import 'package:lester/telainicial.dart';
 import 'package:lester/telapesquisa.dart';
 
-void main() {
-  runApp(const MyApp());
-}
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'User Profile',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: const Perfil(),
-    );
-  }
-}
 
 class Perfil extends StatefulWidget {
   final int initialLikes;

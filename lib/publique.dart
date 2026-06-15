@@ -1,30 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-void main() {
-  runApp(const MyApp());
-}
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Publique',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: const Color(0xFFF5F3E7),
-      ),
-      home: const Publique(),
-    );
-  }
-}
 
-// ─────────────────────────────────────────────
-//  TELA 1 — Detalhes do livro (capa, título, sinopse)
-// ─────────────────────────────────────────────
 class Publique extends StatefulWidget {
   const Publique({super.key});
 
@@ -42,7 +21,7 @@ class _PubliqueState extends State<Publique> {
   final TextEditingController _tituloController = TextEditingController();
   final TextEditingController _sinopseController = TextEditingController();
 
-  // Lista de capítulos com seus textos
+  
   final List<Map<String, dynamic>> _capitulos = [
     {'titulo': 'Capítulo 1', 'texto': ''},
   ];
@@ -78,7 +57,7 @@ class _PubliqueState extends State<Publique> {
       body: SafeArea(
         child: Column(
           children: [
-            // ── HEADER ──────────────────────────────────
+            
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
               child: Row(
@@ -116,7 +95,7 @@ class _PubliqueState extends State<Publique> {
                   children: [
                     const SizedBox(height: 8),
 
-                    // ── CAPA ────────────────────────────
+                   
                     Center(
                       child: GestureDetector(
                         onTap: () {},
@@ -155,7 +134,7 @@ class _PubliqueState extends State<Publique> {
 
                     const SizedBox(height: 16),
 
-                    // ── TÍTULO ──────────────────────────
+                    
                     _buildField(
                       _tituloController,
                       'Inserir Título',
@@ -164,7 +143,7 @@ class _PubliqueState extends State<Publique> {
                     ),
                     const SizedBox(height: 16),
 
-                    // ── SINOPSE ─────────────────────────
+                    
                     _buildField(
                       _sinopseController,
                       'Sinopse:',
@@ -173,7 +152,7 @@ class _PubliqueState extends State<Publique> {
                     ),
                     const SizedBox(height: 24),
 
-                    // ── ESTATÍSTICAS ────────────────────
+                    
                     Container(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 16,
@@ -195,7 +174,7 @@ class _PubliqueState extends State<Publique> {
 
                     const SizedBox(height: 24),
 
-                    // ── LISTA DE CAPÍTULOS ───────────────
+                    
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -239,7 +218,7 @@ class _PubliqueState extends State<Publique> {
 
                     const SizedBox(height: 12),
 
-                    // Cards dos capítulos
+                   
                     ListView.separated(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
@@ -343,7 +322,7 @@ class _PubliqueState extends State<Publique> {
               ),
             ),
 
-            // ── BOTÃO PUBLICAR ──────────────────────────
+            
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
               child: SizedBox(
@@ -430,11 +409,7 @@ class _PubliqueState extends State<Publique> {
   }
 }
 
-// ─────────────────────────────────────────────
-//  CONTROLLER COM RICH TEXT (negrito / itálico / sublinhado)
-//  Interpreta marcadores **texto**, _texto_ e __texto__
-//  e renderiza formatado em tempo real dentro do TextField.
-// ─────────────────────────────────────────────
+
 class RichTextEditingController extends TextEditingController {
   RichTextEditingController({super.text});
 
@@ -447,7 +422,7 @@ class RichTextEditingController extends TextEditingController {
     final List<InlineSpan> spans = [];
     final String source = text;
 
-    // Regex que captura, em ordem: __sublinhado__, **negrito**, _itálico_
+    
     final RegExp pattern = RegExp(
       r'(__.+?__)|(\*\*.+?\*\*)|(_.+?_)',
       dotAll: true,
@@ -464,7 +439,7 @@ class RichTextEditingController extends TextEditingController {
       final String token = match.group(0)!;
 
       if (token.startsWith('__')) {
-        // sublinhado __texto__
+        
         final inner = token.substring(2, token.length - 2);
         spans.add(
           TextSpan(
@@ -475,7 +450,7 @@ class RichTextEditingController extends TextEditingController {
             ),
           ),
         );
-        // sobrescreve para mostrar somente o conteúdo de forma decorada
+       
         spans.removeLast();
         spans.add(
           TextSpan(
@@ -554,9 +529,7 @@ class RichTextEditingController extends TextEditingController {
   }
 }
 
-// ─────────────────────────────────────────────
-//  TELA 2 — Editor de capítulo (estilo Wattpad)
-// ─────────────────────────────────────────────
+
 class EditorCapitulo extends StatefulWidget {
   final String titulo;
   final String texto;
@@ -589,7 +562,7 @@ class _EditorCapituloState extends State<EditorCapitulo> {
   double _fontSize = 16;
   TextAlign _alinhamento = TextAlign.left;
 
-  // Histórico para desfazer / refazer
+  
   final List<TextEditingValue> _historico = [];
   int _historicoIndex = -1;
   bool _ignorarMudanca = false;
@@ -602,7 +575,7 @@ class _EditorCapituloState extends State<EditorCapitulo> {
     _textoFocus = FocusNode();
     _textoFocus.addListener(() => setState(() {}));
 
-    // estado inicial no histórico
+    
     _historico.add(_textoController.value);
     _historicoIndex = 0;
 
@@ -623,14 +596,14 @@ class _EditorCapituloState extends State<EditorCapitulo> {
 
     final atual = _textoController.value;
 
-    // Evita duplicar entradas idênticas no histórico
+    
     if (_historicoIndex >= 0 &&
         _historico[_historicoIndex].text == atual.text) {
       _historico[_historicoIndex] = atual;
       return;
     }
 
-    // Se estávamos no meio do histórico (após um undo), descarta o futuro
+   
     if (_historicoIndex < _historico.length - 1) {
       _historico.removeRange(_historicoIndex + 1, _historico.length);
     }
@@ -638,7 +611,7 @@ class _EditorCapituloState extends State<EditorCapitulo> {
     _historico.add(atual);
     _historicoIndex = _historico.length - 1;
 
-    // Limita o tamanho do histórico
+    
     if (_historico.length > 100) {
       _historico.removeAt(0);
       _historicoIndex--;
@@ -749,7 +722,7 @@ class _EditorCapituloState extends State<EditorCapitulo> {
       body: SafeArea(
         child: Column(
           children: [
-            // ── HEADER DO EDITOR ─────────────────────────
+           
             Container(
               color: bgBeige,
               padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
@@ -856,7 +829,7 @@ class _EditorCapituloState extends State<EditorCapitulo> {
               ),
             ),
 
-            // ── BARRA DE FORMATAÇÃO (estilo Word) ────────
+            
             if (_showToolbar)
               Container(
                 color: const Color(0xFFD4E8EE),
@@ -999,10 +972,10 @@ class _EditorCapituloState extends State<EditorCapitulo> {
                 ),
               ),
 
-            // ── ÁREA DE ESCRITA ──────────────────────────
+            
             Expanded(
               child: Container(
-                color: Colors.white, // <-- alterado de Color(0xFFEAF4FB) para branco
+                color: Colors.white, 
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.fromLTRB(20, 24, 20, 40),
                   child: Column(
@@ -1079,7 +1052,7 @@ class _EditorCapituloState extends State<EditorCapitulo> {
               ),
             ),
 
-            // ── RODAPÉ DO EDITOR ─────────────────────────
+            
             Container(
               color: bgBeige,
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),

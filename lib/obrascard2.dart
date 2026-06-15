@@ -69,7 +69,7 @@ class _Obrascard2State extends State<Obrascard2> {
         : _mostSearchedAuthors;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F3E7), // <- forçado aqui
+      backgroundColor: const Color(0xFFF5F3E7), 
       appBar: AppBar(
         backgroundColor: const Color(0xFFF5F3E7),
         surfaceTintColor: Colors.transparent,

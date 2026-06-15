@@ -2,26 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:lester/Editardados.dart';
 import 'package:lester/perfil.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Mudar para Escritor/leitor',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: const Color(0xFFF5F3E7),
-      ),
-      home: const Escritorleitor(),
-    );
-  }
-}
 
 enum TipoUsuario { leitor, escritor }
 
@@ -100,7 +80,7 @@ class _EscritorleitorState extends State<Escritorleitor> {
       body: SafeArea(
         child: Column(
           children: [
-            // HEADER
+
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
               child: Row(
@@ -137,7 +117,6 @@ class _EscritorleitorState extends State<Escritorleitor> {
                   children: [
                     const SizedBox(height: 8),
 
-                    // OPÇÃO LEITOR
                     _buildOpcao(
                       titulo: 'Leitor',
                       icone: Icons.menu_book_outlined,
@@ -146,7 +125,6 @@ class _EscritorleitorState extends State<Escritorleitor> {
 
                     const SizedBox(height: 16),
 
-                    // OPÇÃO ESCRITOR
                     _buildOpcao(
                       titulo: 'Escritor',
                       icone: Icons.edit_outlined,
@@ -157,7 +135,6 @@ class _EscritorleitorState extends State<Escritorleitor> {
               ),
             ),
 
-            // BOTÃO CONCLUIR
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
               child: SizedBox(

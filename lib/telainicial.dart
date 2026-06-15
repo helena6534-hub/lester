@@ -4,9 +4,6 @@ import 'package:lester/livro.dart';
 import 'package:lester/perfil.dart';
 import 'package:lester/telapesquisa.dart';
 
-void main() {
-  runApp(const Telainicial());
-}
 
 class Telainicial extends StatelessWidget {
   const Telainicial({super.key});
@@ -268,7 +265,6 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 
-//  BANNER CARROSSEL
 
 class _BannerCarousel extends StatefulWidget {
   const _BannerCarousel();

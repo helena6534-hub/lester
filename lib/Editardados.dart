@@ -2,26 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:lester/perfil.dart';
 import 'package:lester/escritorleitor.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Editar Dados',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: const Color(0xFFF5F3E7),
-      ),
-      home: const Editardados(),
-    );
-  }
-}
 
 class Editardados extends StatefulWidget {
   const Editardados({super.key});
@@ -53,7 +33,6 @@ class _EditardadosState extends State<Editardados> {
       body: SafeArea(
         child: Column(
           children: [
-            // HEADER
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
               child: Row(
@@ -90,7 +69,6 @@ class _EditardadosState extends State<Editardados> {
                   children: [
                     const SizedBox(height: 8),
 
-                    // CAMPO USUÁRIO
                     Container(
                       decoration: BoxDecoration(
                         color: bgBeige,
@@ -114,7 +92,6 @@ class _EditardadosState extends State<Editardados> {
 
                     const SizedBox(height: 16),
 
-                    // CAMPO GMAIL
                     Container(
                       decoration: BoxDecoration(
                         color: bgBeige,
@@ -139,7 +116,6 @@ class _EditardadosState extends State<Editardados> {
 
                     const SizedBox(height: 32),
 
-                    // SEÇÃO DO AVATAR
                     Container(
                       width: double.infinity,
                       padding: const EdgeInsets.symmetric(vertical: 32),
@@ -149,7 +125,6 @@ class _EditardadosState extends State<Editardados> {
                       ),
                       child: Column(
                         children: [
-                          // AVATAR (mesmo do perfil.dart)
                           Stack(
                             alignment: Alignment.bottomRight,
                             children: [
@@ -192,7 +167,6 @@ class _EditardadosState extends State<Editardados> {
 
                           const SizedBox(height: 24),
 
-                          // BOTÃO TROCAR TIPO
                           GestureDetector(
                             onTap: () {
                               Navigator.push(
@@ -232,7 +206,6 @@ class _EditardadosState extends State<Editardados> {
               ),
             ),
 
-            // BOTÃO CONCLUIR
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
               child: SizedBox(
@@ -271,7 +244,6 @@ class _EditardadosState extends State<Editardados> {
   }
 }
 
-// MESMO AVATAR DO PERFIL.DART
 class AvatarPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {

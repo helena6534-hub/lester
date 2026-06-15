@@ -36,8 +36,7 @@ class _ChatState extends State<Chat> {
   static const Color textBlue   = Color(0xFF5B8FA3);
   static const Color salmon     = Color(0xFFE89A7D);
 
-  // ⚠️ Substitua pela sua chave do Google AI Studio (começa com AIza...)
-  // Acesse: https://aistudio.google.com/app/apikey
+  
   static const String _apiKey = 'AIzaSyD6lPwZ_6vCMgUhcK7jAUR8Uh6y2s9y5fk';
   static const String _apiUrl =
       'https://generativelanguage.googleapis.com/v1beta/models/'
@@ -59,7 +58,6 @@ class _ChatState extends State<Chat> {
     });
     _scrollToBottom();
 
-    // Monta histórico completo
     final List<Map<String, dynamic>> contents = _messages.map((m) => {
       'role': m.isIA ? 'model' : 'user',
       'parts': [{'text': m.text}],
@@ -82,7 +80,6 @@ class _ChatState extends State<Chat> {
           _messages.add(_Message(text: reply.trim(), isIA: true));
         });
       } else {
-        // Mostra o erro real da API para facilitar o diagnóstico
         final errMsg = data['error']?['message'] ?? 'Erro ${response.statusCode}';
         final errCode = data['error']?['status'] ?? '';
         String userMsg = '⚠️ Erro da API: $errMsg';
@@ -144,7 +141,6 @@ class _ChatState extends State<Chat> {
         child: SafeArea(
           child: Column(
             children: [
-              // AppBar
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 child: Row(
@@ -193,7 +189,6 @@ class _ChatState extends State<Chat> {
                       ),
               ),
 
-              // Input
               Container(
                 margin: const EdgeInsets.all(16),
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
