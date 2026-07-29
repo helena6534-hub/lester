@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lester/resenha.dart'; // nome do arquivo da tela de resenha
-
+import 'package:lester/lerlivro.dart'; // tela de capítulos
 
 class Livro extends StatefulWidget {
   const Livro({super.key});
@@ -47,26 +47,36 @@ class _LivroState extends State<Livro> {
                 child: Column(
                   children: [
                     Center(
-                      child: Container(
-                        width: 180,
-                        height: 270,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.2),
-                              blurRadius: 20,
-                              offset: const Offset(0, 8),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const TelaCapitulos(),
                             ),
-                          ],
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: Image.asset(
-                            'imagens/crime.jpg',
-                            width: 180,
-                            height: 270,
-                            fit: BoxFit.cover,
+                          );
+                        },
+                        child: Container(
+                          width: 180,
+                          height: 270,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.2),
+                                blurRadius: 20,
+                                offset: const Offset(0, 8),
+                              ),
+                            ],
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: Image.asset(
+                              'imagens/crime.jpg',
+                              width: 180,
+                              height: 270,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       ),
